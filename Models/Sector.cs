@@ -10,7 +10,7 @@ namespace FAcT.Models
     public class Sector
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [@Key]
+        [Key]
         public int sectorID { get; set; }
         [Required]
         [MaxLength(20)]

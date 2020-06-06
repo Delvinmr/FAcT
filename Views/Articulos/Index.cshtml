@@ -30,6 +30,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.marca)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClasifarticulosID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ubicacion)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -53,6 +59,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.marca.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClasifarticulosID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ubicacion.Descripcion)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.articulosID">Edit</a> |

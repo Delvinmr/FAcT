@@ -11,7 +11,7 @@ namespace FAcT.Models
     {
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [@Key]
+        [Key]
         public int formadeenvioID { get; set; }
         [Required]
         [MaxLength(20)]

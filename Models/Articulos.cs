@@ -11,7 +11,7 @@ namespace FAcT.Models
     {
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [@Key]
+        [Key]
         public int articulosID { get; set; }
         [Required]
         [MaxLength(20)]
@@ -51,6 +51,10 @@ namespace FAcT.Models
         public int ClasifarticulosID { get; set; }
         public ClasificaciondeArticulos ClasificaciondeArticulos { get; set; }
 
-
+        [Required]
+        [Display(Name = "Ubicacion")]
+        [ForeignKey("Ubicacion")]
+        public int ubicacionID { get; set; }
+        public Ubicacion ubicacion { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace FAcT.Models
     public class Vendedores
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [@Key]
+        [Key]
         public int vendedorID { get; set; }
         [Required]
         [MaxLength(20)]

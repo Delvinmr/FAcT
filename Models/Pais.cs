@@ -10,8 +10,8 @@ namespace FAcT.Models
     public class Pais
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [@Key]
-        
+        [Key]
+
         public int paisID { get; set; }
 
         [Required]

@@ -10,7 +10,7 @@ namespace FAcT.Models
     public class Empresa
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [@Key]
+        [Key]
         public int empresaID { get; set; }
         [Required]
         [MaxLength(20)]

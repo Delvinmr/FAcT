@@ -10,7 +10,7 @@ namespace FAcT.Models
     public class Clientes
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [@Key]
+        [Key]
         public int clienteID { get; set; }
         [Required]
         [MaxLength(20)]

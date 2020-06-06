@@ -10,7 +10,7 @@ namespace FAcT.Models
     public class Suplidores
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [@Key]
+        [Key]
         public int SuplidoresID { get; set; }
         [Required]
         [MaxLength(20)]

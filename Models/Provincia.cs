@@ -10,7 +10,7 @@ namespace FAcT.Models
     public class Provincia
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [@Key]
+        [Key]
 
         public int provinciaID { get; set; }
         [Required]

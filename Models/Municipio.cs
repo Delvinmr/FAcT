@@ -10,7 +10,7 @@ namespace FAcT.Models
     public class Municipio
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [@Key]
+        [Key]
 
         public int municipioID { get; set; }
         [Required]

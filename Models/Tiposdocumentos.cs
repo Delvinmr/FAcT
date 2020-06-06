@@ -11,7 +11,7 @@ namespace FAcT.Models
     {
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [@Key]
+        [Key]
         public int tipodocumentoID { get; set; }
         
         [Required]
