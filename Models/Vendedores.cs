@@ -16,38 +16,38 @@ namespace FAcT.Models
 
         [Required]
         [StringLength(50)]
-        [Display(Name = "Nombre Vendedor")]
+        [Display(Name = "Nombre ")]
         public string nombre { get; set; }
 
 
         [Required]
         [MaxLength(50)]
-        [Display(Name = "ApellidosVendedor")]
+        [Display(Name = "Apellidos")]
         public string apellidos { get; set; }
 
         [Required]
         [MaxLength(20)]
-        [Display(Name = "Documento Vendedor ")]
+        [Display(Name = "Documento ")]
         public string Documento { get; set; }
 
         [Required]
         [MaxLength(100)]
-        [Display(Name = "Direccion Vendedor")]
+        [Display(Name = "Direccion")]
         public string Direccion { get; set; }
 
         [Required]
         [MaxLength(20)]
-        [Display(Name = "Telefono Vendedor")]
+        [Display(Name = "Telefono")]
         public string Telefono { get; set; }
 
         [Required]
         [MaxLength(20)]
-        [Display(Name = "Celelular Vendedor")]
+        [Display(Name = "Celelular")]
         public string Celular { get; set; }
 
         [Required]
         [MaxLength(50)]
-        [Display(Name = "Correo Vendedor")]
+        [Display(Name = "Correo ")]
         public string Correo { get; set; }
     }
 }

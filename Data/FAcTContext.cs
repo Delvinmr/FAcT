@@ -59,5 +59,7 @@ namespace FAcT.Data
         public DbSet<FAcT.Models.Vendedores> Vendedores { get; set; }
 
         public DbSet<FAcT.Models.ClasificaciondeArticulos> ClasificaciondeArticulos { get; set; }
+
+        public DbSet<FAcT.Models.Clientes> Clientes { get; set; }
     }
 }

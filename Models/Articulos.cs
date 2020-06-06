@@ -33,6 +33,7 @@ namespace FAcT.Models
         [Display(Name = "Unidad")]
         [ForeignKey("unidaddemedis")]
         public int unidaddemedisID { get; set; }
+
         public Unidaddemedidas unidaddemedidas { get; set; }
 
         [Required]
@@ -53,5 +54,6 @@ namespace FAcT.Models
         [ForeignKey("Ubicacion")]
         public int ubicacionID { get; set; }
         public Ubicacion ubicacion { get; set; }
+
     }
 }

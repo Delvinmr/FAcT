@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace FAcT.Models
 {
-    public class Suplidores
+    public class Clientes
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int SuplidoresID { get; set; }
-       
+        public int clienteID { get; set; }
+
 
         [Required]
         [StringLength(50)]
-        [Display(Name = "Nombre ")]
+        [Display(Name = "Nombre")]
         public string nombre { get; set; }
 
 
@@ -47,9 +47,13 @@ namespace FAcT.Models
 
         [Required]
         [MaxLength(50)]
-        [Display(Name = "Correo ")]
+        [Display(Name = "Correo")]
         public string Correo { get; set; }
 
-       
+        [Required]
+        [Display(Name = "Clasificacion clientes")]
+        [ForeignKey("Clasfclientes")]
+        public int ClasfclientesID { get; set; }
+        public Clasificacionclientes Clasificacionclientes { get; set; }
     }
 }
