@@ -13,10 +13,7 @@ namespace FAcT.Models
         [Key]
 
         public int provinciaID { get; set; }
-        [Required]
-        [MaxLength(20)]
-        [Display(Name = "Codigo Provincia")]
-        public int Codigo_Provincia { get; set; }
+      
 
         [Required]
         [StringLength(50)]

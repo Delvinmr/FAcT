@@ -18,7 +18,7 @@ namespace FAcT.Data
 
         public DbSet<FAcT.Models.Empleado> Empleado { get; set; }
 
-        public DbSet<FAcT.Models.Clientes> Clientes { get; set; }
+       
 
         public DbSet<FAcT.Models.Clasificacionclientes> Clasificacionclientes { get; set; }
 
@@ -57,5 +57,7 @@ namespace FAcT.Data
         public DbSet<FAcT.Models.Unidaddemedidas> Unidaddemedidas { get; set; }
 
         public DbSet<FAcT.Models.Vendedores> Vendedores { get; set; }
+
+        public DbSet<FAcT.Models.ClasificaciondeArticulos> ClasificaciondeArticulos { get; set; }
     }
 }

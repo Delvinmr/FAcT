@@ -14,10 +14,7 @@ namespace FAcT.Models
 
         public int paisID { get; set; }
 
-        [Required]
-        [MaxLength(20)]
-        [Display(Name = "Codigo Pais")]
-        public int Codigo_Pais { get; set; }
+     
 
         [Required]
         [StringLength(50)]

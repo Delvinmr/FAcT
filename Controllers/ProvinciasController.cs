@@ -57,7 +57,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("provinciaID,Codigo_Provincia,nombre_provincia,paisID")] Provincia provincia)
+        public async Task<IActionResult> Create([Bind("provinciaID,nombre_provincia,paisID")] Provincia provincia)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("provinciaID,Codigo_Provincia,nombre_provincia,paisID")] Provincia provincia)
+        public async Task<IActionResult> Edit(int id, [Bind("provinciaID,nombre_provincia,paisID")] Provincia provincia)
         {
             if (id != provincia.provinciaID)
             {

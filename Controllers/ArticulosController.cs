@@ -49,8 +49,8 @@ namespace FAcT.Controllers
         // GET: Articulos/Create
         public IActionResult Create()
         {
-            ViewData["marcaID"] = new SelectList(_context.Set<Marca>(), "marcaID", "Descripcion");
-            ViewData["ubicacionID"] = new SelectList(_context.Set<Ubicacion>(), "ubicacionID", "Descripcion");
+            ViewData["marcaID"] = new SelectList(_context.Marca, "marcaID", "Descripcion");
+            ViewData["ubicacionID"] = new SelectList(_context.Ubicacion, "ubicacionID", "Descripcion");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("articulosID,Codigo,Descripcion,Precio,Itebis,unidaddemedisID,marcaID,ClasifarticulosID,ubicacionID")] Articulos articulos)
+        public async Task<IActionResult> Create([Bind("articulosID,Descripcion,Precio,Itebis,unidaddemedisID,marcaID,ClasifarticulosID,ubicacionID")] Articulos articulos)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +67,8 @@ namespace FAcT.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["marcaID"] = new SelectList(_context.Set<Marca>(), "marcaID", "Descripcion", articulos.marcaID);
-            ViewData["ubicacionID"] = new SelectList(_context.Set<Ubicacion>(), "ubicacionID", "Descripcion", articulos.ubicacionID);
+            ViewData["marcaID"] = new SelectList(_context.Marca, "marcaID", "Descripcion", articulos.marcaID);
+            ViewData["ubicacionID"] = new SelectList(_context.Ubicacion, "ubicacionID", "Descripcion", articulos.ubicacionID);
             return View(articulos);
         }
 
@@ -85,8 +85,8 @@ namespace FAcT.Controllers
             {
                 return NotFound();
             }
-            ViewData["marcaID"] = new SelectList(_context.Set<Marca>(), "marcaID", "Descripcion", articulos.marcaID);
-            ViewData["ubicacionID"] = new SelectList(_context.Set<Ubicacion>(), "ubicacionID", "Descripcion", articulos.ubicacionID);
+            ViewData["marcaID"] = new SelectList(_context.Marca, "marcaID", "Descripcion", articulos.marcaID);
+            ViewData["ubicacionID"] = new SelectList(_context.Ubicacion, "ubicacionID", "Descripcion", articulos.ubicacionID);
             return View(articulos);
         }
 
@@ -95,7 +95,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("articulosID,Codigo,Descripcion,Precio,Itebis,unidaddemedisID,marcaID,ClasifarticulosID,ubicacionID")] Articulos articulos)
+        public async Task<IActionResult> Edit(int id, [Bind("articulosID,Descripcion,Precio,Itebis,unidaddemedisID,marcaID,ClasifarticulosID,ubicacionID")] Articulos articulos)
         {
             if (id != articulos.articulosID)
             {
@@ -122,8 +122,8 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["marcaID"] = new SelectList(_context.Set<Marca>(), "marcaID", "Descripcion", articulos.marcaID);
-            ViewData["ubicacionID"] = new SelectList(_context.Set<Ubicacion>(), "ubicacionID", "Descripcion", articulos.ubicacionID);
+            ViewData["marcaID"] = new SelectList(_context.Marca, "marcaID", "Descripcion", articulos.marcaID);
+            ViewData["ubicacionID"] = new SelectList(_context.Ubicacion, "ubicacionID", "Descripcion", articulos.ubicacionID);
             return View(articulos);
         }
 

@@ -13,10 +13,7 @@ namespace FAcT.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int formadeenvioID { get; set; }
-        [Required]
-        [MaxLength(20)]
-        [Display(Name = "Codigo Forma Envio")]
-        public int Codigo { get; set; }
+      
         [Required]
         [MaxLength(50)]
         [Display(Name = "Descripcion")]

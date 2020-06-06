@@ -13,9 +13,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Codigo_Pais)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.nombre_pais)
             </th>
             <th></th>
@@ -24,9 +21,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Codigo_Pais)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.nombre_pais)
             </td>

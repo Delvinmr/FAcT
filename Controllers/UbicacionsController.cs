@@ -54,7 +54,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ubicacionID,Codigo,Descripcion")] Ubicacion ubicacion)
+        public async Task<IActionResult> Create([Bind("ubicacionID,Descripcion")] Ubicacion ubicacion)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ubicacionID,Codigo,Descripcion")] Ubicacion ubicacion)
+        public async Task<IActionResult> Edit(int id, [Bind("ubicacionID,Descripcion")] Ubicacion ubicacion)
         {
             if (id != ubicacion.ubicacionID)
             {

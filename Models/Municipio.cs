@@ -13,10 +13,7 @@ namespace FAcT.Models
         [Key]
 
         public int municipioID { get; set; }
-        [Required]
-        [MaxLength(20)]
-        [Display(Name = "Codigo Municipio")]
-        public int Codigo_Municipio { get; set; }
+       
 
         [Required]
         [StringLength(50)]

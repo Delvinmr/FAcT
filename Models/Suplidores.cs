@@ -12,10 +12,7 @@ namespace FAcT.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int SuplidoresID { get; set; }
-        [Required]
-        [MaxLength(20)]
-        [Display(Name = "Codigo Suplidor")]
-        public int Codigo { get; set; }
+       
 
         [Required]
         [StringLength(50)]

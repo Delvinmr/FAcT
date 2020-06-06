@@ -54,7 +54,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("formadeenvioID,Codigo,Descripcion")] Formadeenvio formadeenvio)
+        public async Task<IActionResult> Create([Bind("formadeenvioID,Descripcion")] Formadeenvio formadeenvio)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("formadeenvioID,Codigo,Descripcion")] Formadeenvio formadeenvio)
+        public async Task<IActionResult> Edit(int id, [Bind("formadeenvioID,Descripcion")] Formadeenvio formadeenvio)
         {
             if (id != formadeenvio.formadeenvioID)
             {

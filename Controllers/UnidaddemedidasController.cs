@@ -54,7 +54,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("unidaddemedisID,Codigo,Descripcion")] Unidaddemedidas unidaddemedidas)
+        public async Task<IActionResult> Create([Bind("unidaddemedisID,Descripcion")] Unidaddemedidas unidaddemedidas)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("unidaddemedisID,Codigo,Descripcion")] Unidaddemedidas unidaddemedidas)
+        public async Task<IActionResult> Edit(int id, [Bind("unidaddemedisID,Descripcion")] Unidaddemedidas unidaddemedidas)
         {
             if (id != unidaddemedidas.unidaddemedisID)
             {

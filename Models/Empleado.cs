@@ -13,10 +13,7 @@ namespace FAcT.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int empleadoID { get; set; }
-        [Required]
-        [MaxLength(20)]
-        [Display(Name = "Codigo Empleado")]
-        public int Codigo { get; set; }
+     
 
         [Required]
         [StringLength(50)]

@@ -57,7 +57,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("sectorID,Codigo_Sector,nombre_sector,municipioID")] Sector sector)
+        public async Task<IActionResult> Create([Bind("sectorID,nombre_sector,municipioID")] Sector sector)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("sectorID,Codigo_Sector,nombre_sector,municipioID")] Sector sector)
+        public async Task<IActionResult> Edit(int id, [Bind("sectorID,nombre_sector,municipioID")] Sector sector)
         {
             if (id != sector.sectorID)
             {

@@ -49,8 +49,8 @@ namespace FAcT.Controllers
         // GET: Empleadoes/Create
         public IActionResult Create()
         {
-            ViewData["empresaID"] = new SelectList(_context.Set<Empresa>(), "empresaID", "Descripcion");
-            ViewData["puestodetrabID"] = new SelectList(_context.Set<Puestodetrabajo>(), "puestodetrabID", "Descripcion");
+            ViewData["empresaID"] = new SelectList(_context.Empresa, "empresaID", "Descripcion");
+            ViewData["puestodetrabID"] = new SelectList(_context.Puestodetrabajo, "puestodetrabID", "Descripcion");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("empleadoID,Codigo,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,empresaID,puestodetrabID")] Empleado empleado)
+        public async Task<IActionResult> Create([Bind("empleadoID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,empresaID,puestodetrabID")] Empleado empleado)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +67,8 @@ namespace FAcT.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["empresaID"] = new SelectList(_context.Set<Empresa>(), "empresaID", "Descripcion", empleado.empresaID);
-            ViewData["puestodetrabID"] = new SelectList(_context.Set<Puestodetrabajo>(), "puestodetrabID", "Descripcion", empleado.puestodetrabID);
+            ViewData["empresaID"] = new SelectList(_context.Empresa, "empresaID", "Descripcion", empleado.empresaID);
+            ViewData["puestodetrabID"] = new SelectList(_context.Puestodetrabajo, "puestodetrabID", "Descripcion", empleado.puestodetrabID);
             return View(empleado);
         }
 
@@ -85,8 +85,8 @@ namespace FAcT.Controllers
             {
                 return NotFound();
             }
-            ViewData["empresaID"] = new SelectList(_context.Set<Empresa>(), "empresaID", "Descripcion", empleado.empresaID);
-            ViewData["puestodetrabID"] = new SelectList(_context.Set<Puestodetrabajo>(), "puestodetrabID", "Descripcion", empleado.puestodetrabID);
+            ViewData["empresaID"] = new SelectList(_context.Empresa, "empresaID", "Descripcion", empleado.empresaID);
+            ViewData["puestodetrabID"] = new SelectList(_context.Puestodetrabajo, "puestodetrabID", "Descripcion", empleado.puestodetrabID);
             return View(empleado);
         }
 
@@ -95,7 +95,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("empleadoID,Codigo,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,empresaID,puestodetrabID")] Empleado empleado)
+        public async Task<IActionResult> Edit(int id, [Bind("empleadoID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,empresaID,puestodetrabID")] Empleado empleado)
         {
             if (id != empleado.empleadoID)
             {
@@ -122,8 +122,8 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["empresaID"] = new SelectList(_context.Set<Empresa>(), "empresaID", "Descripcion", empleado.empresaID);
-            ViewData["puestodetrabID"] = new SelectList(_context.Set<Puestodetrabajo>(), "puestodetrabID", "Descripcion", empleado.puestodetrabID);
+            ViewData["empresaID"] = new SelectList(_context.Empresa, "empresaID", "Descripcion", empleado.empresaID);
+            ViewData["puestodetrabID"] = new SelectList(_context.Puestodetrabajo, "puestodetrabID", "Descripcion", empleado.puestodetrabID);
             return View(empleado);
         }
 

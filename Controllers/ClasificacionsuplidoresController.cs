@@ -54,7 +54,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("clasifsuplidoresID,Codigo,Descripcion")] Clasificacionsuplidores clasificacionsuplidores)
+        public async Task<IActionResult> Create([Bind("clasifsuplidoresID,Descripcion")] Clasificacionsuplidores clasificacionsuplidores)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("clasifsuplidoresID,Codigo,Descripcion")] Clasificacionsuplidores clasificacionsuplidores)
+        public async Task<IActionResult> Edit(int id, [Bind("clasifsuplidoresID,Descripcion")] Clasificacionsuplidores clasificacionsuplidores)
         {
             if (id != clasificacionsuplidores.clasifsuplidoresID)
             {

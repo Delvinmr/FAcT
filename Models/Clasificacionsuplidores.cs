@@ -13,10 +13,7 @@ namespace FAcT.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int clasifsuplidoresID { get; set; }
-        [Required]
-        [MaxLength(20)]
-        [Display(Name = "Codigo Clasificacion Suplidores")]
-        public int Codigo { get; set; }
+  
         [Required]
         [MaxLength(50)]
         [Display(Name = "Descripcion")]

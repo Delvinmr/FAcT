@@ -48,7 +48,7 @@ namespace FAcT.Controllers
         // GET: Municipios/Create
         public IActionResult Create()
         {
-            ViewData["provinciaID"] = new SelectList(_context.Set<Provincia>(), "provinciaID", "nombre_provincia");
+            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("municipioID,Codigo_Municipio,nombre_municipio,provinciaID")] Municipio municipio)
+        public async Task<IActionResult> Create([Bind("municipioID,nombre_municipio,provinciaID")] Municipio municipio)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace FAcT.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["provinciaID"] = new SelectList(_context.Set<Provincia>(), "provinciaID", "nombre_provincia", municipio.provinciaID);
+            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", municipio.provinciaID);
             return View(municipio);
         }
 
@@ -82,7 +82,7 @@ namespace FAcT.Controllers
             {
                 return NotFound();
             }
-            ViewData["provinciaID"] = new SelectList(_context.Set<Provincia>(), "provinciaID", "nombre_provincia", municipio.provinciaID);
+            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", municipio.provinciaID);
             return View(municipio);
         }
 
@@ -91,7 +91,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("municipioID,Codigo_Municipio,nombre_municipio,provinciaID")] Municipio municipio)
+        public async Task<IActionResult> Edit(int id, [Bind("municipioID,nombre_municipio,provinciaID")] Municipio municipio)
         {
             if (id != municipio.municipioID)
             {
@@ -118,7 +118,7 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["provinciaID"] = new SelectList(_context.Set<Provincia>(), "provinciaID", "nombre_provincia", municipio.provinciaID);
+            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", municipio.provinciaID);
             return View(municipio);
         }
 
