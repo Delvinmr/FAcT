@@ -4,14 +4,16 @@ using FAcT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FAcT.Migrations
 {
     [DbContext(typeof(FAcTContext))]
-    partial class FAcTContextModelSnapshot : ModelSnapshot
+    [Migration("20200607003922_nuevaclt")]
+    partial class nuevaclt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

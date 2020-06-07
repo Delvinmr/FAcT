@@ -48,9 +48,22 @@
                 <span asp-validation-for="Correo" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="tipodocumentoID" class="control-label"></label>
+                <input asp-for="tipodocumentoID" class="form-control" />
+                <span asp-validation-for="tipodocumentoID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="ClasfclientesID" class="control-label"></label>
                 <input asp-for="ClasfclientesID" class="form-control" />
                 <span asp-validation-for="ClasfclientesID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="paisID" class="control-label"></label>
+                <select asp-for="paisID" class ="form-control" asp-items="ViewBag.paisID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="provinciaID" class="control-label"></label>
+                <select asp-for="provinciaID" class ="form-control" asp-items="ViewBag.provinciaID"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

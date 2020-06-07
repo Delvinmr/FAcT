@@ -53,10 +53,28 @@
             @Html.DisplayFor(model => model.Correo)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.tipodocumentoID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.tipodocumentoID)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ClasfclientesID)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ClasfclientesID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pais)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pais.nombre_pais)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.provincia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.provincia.nombre_provincia)
         </dd>
     </dl>
 </div>

@@ -34,7 +34,16 @@
                 @Html.DisplayNameFor(model => model.Correo)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.tipodocumentoID)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ClasfclientesID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.provincia)
             </th>
             <th></th>
         </tr>
@@ -64,7 +73,16 @@
                 @Html.DisplayFor(modelItem => item.Correo)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.tipodocumentoID)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ClasfclientesID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pais.nombre_pais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.provincia.nombre_provincia)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.clienteID">Edit</a> |

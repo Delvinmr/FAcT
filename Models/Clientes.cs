@@ -40,6 +40,7 @@ namespace FAcT.Models
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
 
+
         [Required]
         [MaxLength(20)]
         [Display(Name = "Celelular ")]
@@ -51,9 +52,28 @@ namespace FAcT.Models
         public string Correo { get; set; }
 
         [Required]
+        [Display(Name = "Tipos Documentos")]
+        [ForeignKey("tipodocumento")]
+        public int tipodocumentoID { get; set; }
+        public Tiposdocumentos tiposdocumentos { get; set; }
+
+        [Required]
         [Display(Name = "Clasificacion clientes")]
         [ForeignKey("Clasfclientes")]
         public int ClasfclientesID { get; set; }
         public Clasificacionclientes Clasificacionclientes { get; set; }
+
+        [Required]
+        [Display(Name = "Pais")]
+        [ForeignKey("pais")]
+        public int paisID { get; set; }
+        public Pais pais { get; set; }
+
+        [Required]
+        [Display(Name = "Pais")]
+        [ForeignKey("provincia")]
+        public int provinciaID { get; set; }
+        public Provincia provincia { get; set; }
+
     }
 }

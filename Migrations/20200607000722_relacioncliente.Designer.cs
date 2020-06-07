@@ -4,14 +4,16 @@ using FAcT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FAcT.Migrations
 {
     [DbContext(typeof(FAcTContext))]
-    partial class FAcTContextModelSnapshot : ModelSnapshot
+    [Migration("20200607000722_relacioncliente")]
+    partial class relacioncliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,12 +177,6 @@ namespace FAcT.Migrations
                     b.Property<int>("provinciaID")
                         .HasColumnType("int");
 
-                    b.Property<int>("tipodocumentoID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("tiposdocumentostipodocumentoID")
-                        .HasColumnType("int");
-
                     b.HasKey("clienteID");
 
                     b.HasIndex("ClasificacionclientesClasfclientesID");
@@ -188,8 +184,6 @@ namespace FAcT.Migrations
                     b.HasIndex("paisID");
 
                     b.HasIndex("provinciaID");
-
-                    b.HasIndex("tiposdocumentostipodocumentoID");
 
                     b.ToTable("Clientes");
                 });
@@ -660,10 +654,6 @@ namespace FAcT.Migrations
                         .HasForeignKey("provinciaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("FAcT.Models.Tiposdocumentos", "tiposdocumentos")
-                        .WithMany()
-                        .HasForeignKey("tiposdocumentostipodocumentoID");
                 });
 
             modelBuilder.Entity("FAcT.Models.Empleado", b =>

@@ -22,7 +22,8 @@ namespace FAcT.Controllers
         // GET: Clientes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clientes.ToListAsync());
+            var fAcTContext = _context.Clientes.Include(c => c.pais).Include(c => c.provincia);
+            return View(await fAcTContext.ToListAsync());
         }
 
         // GET: Clientes/Details/5
@@ -34,6 +35,8 @@ namespace FAcT.Controllers
             }
 
             var clientes = await _context.Clientes
+                .Include(c => c.pais)
+                .Include(c => c.provincia)
                 .FirstOrDefaultAsync(m => m.clienteID == id);
             if (clientes == null)
             {
@@ -46,6 +49,8 @@ namespace FAcT.Controllers
         // GET: Clientes/Create
         public IActionResult Create()
         {
+            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais");
+            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia");
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("clienteID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,ClasfclientesID")] Clientes clientes)
+        public async Task<IActionResult> Create([Bind("clienteID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,tipodocumentoID,ClasfclientesID,paisID,provinciaID")] Clientes clientes)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +67,8 @@ namespace FAcT.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais", clientes.paisID);
+            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", clientes.provinciaID);
             return View(clientes);
         }
 
@@ -78,6 +85,8 @@ namespace FAcT.Controllers
             {
                 return NotFound();
             }
+            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais", clientes.paisID);
+            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", clientes.provinciaID);
             return View(clientes);
         }
 
@@ -86,7 +95,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("clienteID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,ClasfclientesID")] Clientes clientes)
+        public async Task<IActionResult> Edit(int id, [Bind("clienteID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,tipodocumentoID,ClasfclientesID,paisID,provinciaID")] Clientes clientes)
         {
             if (id != clientes.clienteID)
             {
@@ -113,6 +122,8 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais", clientes.paisID);
+            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", clientes.provinciaID);
             return View(clientes);
         }
 
@@ -125,6 +136,8 @@ namespace FAcT.Controllers
             }
 
             var clientes = await _context.Clientes
+                .Include(c => c.pais)
+                .Include(c => c.provincia)
                 .FirstOrDefaultAsync(m => m.clienteID == id);
             if (clientes == null)
             {
