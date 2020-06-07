@@ -8,24 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class MarcasController : Controller
+    public class PaisController : Controller
     {
         private readonly FAcTContext _context;
 
-        public MarcasController(FAcTContext context)
+        public PaisController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Marcas
+        // GET: Pais
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Marca.ToListAsync());
+            var fAcTContext = _context.Pais.Include(p => p.Moneda);
+            return View(await fAcTContext.ToListAsync());
         }
 
-        // GET: Marcas/Details/5
+        // GET: Pais/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,42 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var marca = await _context.Marca
-                .FirstOrDefaultAsync(m => m.marcaID == id);
-            if (marca == null)
+            var pais = await _context.Pais
+                .Include(p => p.Moneda)
+                .FirstOrDefaultAsync(m => m.paisID == id);
+            if (pais == null)
             {
                 return NotFound();
             }
 
-            return View(marca);
+            return View(pais);
         }
 
-        // GET: Marcas/Create
+        // GET: Pais/Create
         public IActionResult Create()
         {
+            ViewData["MonedaID"] = new SelectList(_context.Moneda, "MonedaID", "Descripcion");
             return View();
         }
 
-        // POST: Marcas/Create
+        // POST: Pais/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("marcaID,Descripcion")] Marca marca)
+        public async Task<IActionResult> Create([Bind("paisID,nombre_pais,MonedaID")] Pais pais)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(marca);
+                _context.Add(pais);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(marca);
+            ViewData["MonedaID"] = new SelectList(_context.Moneda, "MonedaID", "Descripcion", pais.MonedaID);
+            return View(pais);
         }
 
-        // GET: Marcas/Edit/5
+        // GET: Pais/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +77,23 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var marca = await _context.Marca.FindAsync(id);
-            if (marca == null)
+            var pais = await _context.Pais.FindAsync(id);
+            if (pais == null)
             {
                 return NotFound();
             }
-            return View(marca);
+            ViewData["MonedaID"] = new SelectList(_context.Moneda, "MonedaID", "Descripcion", pais.MonedaID);
+            return View(pais);
         }
 
-        // POST: Marcas/Edit/5
+        // POST: Pais/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("marcaID,Descripcion")] Marca marca)
+        public async Task<IActionResult> Edit(int id, [Bind("paisID,nombre_pais,MonedaID")] Pais pais)
         {
-            if (id != marca.marcaID)
+            if (id != pais.paisID)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(marca);
+                    _context.Update(pais);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MarcaExists(marca.marcaID))
+                    if (!PaisExists(pais.paisID))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,11 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(marca);
+            ViewData["MonedaID"] = new SelectList(_context.Moneda, "MonedaID", "Descripcion", pais.MonedaID);
+            return View(pais);
         }
 
-        // GET: Marcas/Delete/5
+        // GET: Pais/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +130,31 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var marca = await _context.Marca
-                .FirstOrDefaultAsync(m => m.marcaID == id);
-            if (marca == null)
+            var pais = await _context.Pais
+                .Include(p => p.Moneda)
+                .FirstOrDefaultAsync(m => m.paisID == id);
+            if (pais == null)
             {
                 return NotFound();
             }
 
-            return View(marca);
+            return View(pais);
         }
 
-        // POST: Marcas/Delete/5
+        // POST: Pais/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var marca = await _context.Marca.FindAsync(id);
-            _context.Marca.Remove(marca);
+            var pais = await _context.Pais.FindAsync(id);
+            _context.Pais.Remove(pais);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MarcaExists(int id)
+        private bool PaisExists(int id)
         {
-            return _context.Marca.Any(e => e.marcaID == id);
+            return _context.Pais.Any(e => e.paisID == id);
         }
     }
 }

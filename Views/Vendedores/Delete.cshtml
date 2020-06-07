@@ -24,6 +24,12 @@
             @Html.DisplayFor(model => model.apellidos)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.tiposdocumentos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.tiposdocumentos.Descripcion)
+        </dd class>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Documento)
         </dt>
         <dd class = "col-sm-10">
@@ -53,6 +59,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Correo)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Suplidores)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Suplidores.Correo)
+        </dd class>
     </dl>
     
     <form asp-action="Delete">

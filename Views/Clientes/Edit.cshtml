@@ -24,6 +24,11 @@
                 <span asp-validation-for="apellidos" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="tiposdocumentosID" class="control-label"></label>
+                <select asp-for="tiposdocumentosID" class="form-control" asp-items="ViewBag.tiposdocumentosID"></select>
+                <span asp-validation-for="tiposdocumentosID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Documento" class="control-label"></label>
                 <input asp-for="Documento" class="form-control" />
                 <span asp-validation-for="Documento" class="text-danger"></span>
@@ -49,14 +54,9 @@
                 <span asp-validation-for="Correo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="tipodocumentoID" class="control-label"></label>
-                <input asp-for="tipodocumentoID" class="form-control" />
-                <span asp-validation-for="tipodocumentoID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClasfclientesID" class="control-label"></label>
-                <input asp-for="ClasfclientesID" class="form-control" />
-                <span asp-validation-for="ClasfclientesID" class="text-danger"></span>
+                <label asp-for="ClasificacionclientesID" class="control-label"></label>
+                <select asp-for="ClasificacionclientesID" class="form-control" asp-items="ViewBag.ClasificacionclientesID"></select>
+                <span asp-validation-for="ClasificacionclientesID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="paisID" class="control-label"></label>

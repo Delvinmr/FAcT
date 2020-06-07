@@ -16,19 +16,9 @@ namespace FAcT.Models
 
         [Required]
         [StringLength(50)]
-        [Display(Name = "Nombre ")]
+        [Display(Name = "Nombre")]
         public string nombre { get; set; }
 
-
-        [Required]
-        [MaxLength(50)]
-        [Display(Name = "Apellidos ")]
-        public string apellidos { get; set; }
-
-        [Required]
-        [MaxLength(20)]
-        [Display(Name = "Documento")]
-        public string Documento { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -40,16 +30,20 @@ namespace FAcT.Models
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
 
-        [Required]
-        [MaxLength(20)]
-        [Display(Name = "Celelular ")]
-        public string Celular { get; set; }
+        
 
         [Required]
         [MaxLength(50)]
         [Display(Name = "Correo ")]
         public string Correo { get; set; }
 
-       
+        [Required]
+        [Display(Name = "Clasificacion suplidores")]
+        [ForeignKey("Clasificacionsuplidores")]
+        public int ClasificacionsuplidoresID { get; set; }
+        public Clasificacionsuplidores Clasificacionsuplidores { get; set; }
+
+
+
     }
 }

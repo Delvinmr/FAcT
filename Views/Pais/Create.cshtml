@@ -18,6 +18,10 @@
                 <span asp-validation-for="nombre_pais" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="MonedaID" class="control-label"></label>
+                <select asp-for="MonedaID" class ="form-control" asp-items="ViewBag.MonedaID"></select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -25,7 +29,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index"class="btn btn-dark">Back to List</a>
 </div>
 
 @section Scripts {

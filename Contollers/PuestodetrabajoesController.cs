@@ -8,24 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class SuplidoresController : Controller
+    public class PuestodetrabajoesController : Controller
     {
         private readonly FAcTContext _context;
 
-        public SuplidoresController(FAcTContext context)
+        public PuestodetrabajoesController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Suplidores
+        // GET: Puestodetrabajoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Suplidores.ToListAsync());
+            return View(await _context.Puestodetrabajo.ToListAsync());
         }
 
-        // GET: Suplidores/Details/5
+        // GET: Puestodetrabajoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var suplidores = await _context.Suplidores
-                .FirstOrDefaultAsync(m => m.SuplidoresID == id);
-            if (suplidores == null)
+            var puestodetrabajo = await _context.Puestodetrabajo
+                .FirstOrDefaultAsync(m => m.PuestodetrabajoID == id);
+            if (puestodetrabajo == null)
             {
                 return NotFound();
             }
 
-            return View(suplidores);
+            return View(puestodetrabajo);
         }
 
-        // GET: Suplidores/Create
+        // GET: Puestodetrabajoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Suplidores/Create
+        // POST: Puestodetrabajoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SuplidoresID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo")] Suplidores suplidores)
+        public async Task<IActionResult> Create([Bind("PuestodetrabajoID,Descripcion")] Puestodetrabajo puestodetrabajo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(suplidores);
+                _context.Add(puestodetrabajo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(suplidores);
+            return View(puestodetrabajo);
         }
 
-        // GET: Suplidores/Edit/5
+        // GET: Puestodetrabajoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var suplidores = await _context.Suplidores.FindAsync(id);
-            if (suplidores == null)
+            var puestodetrabajo = await _context.Puestodetrabajo.FindAsync(id);
+            if (puestodetrabajo == null)
             {
                 return NotFound();
             }
-            return View(suplidores);
+            return View(puestodetrabajo);
         }
 
-        // POST: Suplidores/Edit/5
+        // POST: Puestodetrabajoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SuplidoresID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo")] Suplidores suplidores)
+        public async Task<IActionResult> Edit(int id, [Bind("PuestodetrabajoID,Descripcion")] Puestodetrabajo puestodetrabajo)
         {
-            if (id != suplidores.SuplidoresID)
+            if (id != puestodetrabajo.PuestodetrabajoID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(suplidores);
+                    _context.Update(puestodetrabajo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SuplidoresExists(suplidores.SuplidoresID))
+                    if (!PuestodetrabajoExists(puestodetrabajo.PuestodetrabajoID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(suplidores);
+            return View(puestodetrabajo);
         }
 
-        // GET: Suplidores/Delete/5
+        // GET: Puestodetrabajoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var suplidores = await _context.Suplidores
-                .FirstOrDefaultAsync(m => m.SuplidoresID == id);
-            if (suplidores == null)
+            var puestodetrabajo = await _context.Puestodetrabajo
+                .FirstOrDefaultAsync(m => m.PuestodetrabajoID == id);
+            if (puestodetrabajo == null)
             {
                 return NotFound();
             }
 
-            return View(suplidores);
+            return View(puestodetrabajo);
         }
 
-        // POST: Suplidores/Delete/5
+        // POST: Puestodetrabajoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var suplidores = await _context.Suplidores.FindAsync(id);
-            _context.Suplidores.Remove(suplidores);
+            var puestodetrabajo = await _context.Puestodetrabajo.FindAsync(id);
+            _context.Puestodetrabajo.Remove(puestodetrabajo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SuplidoresExists(int id)
+        private bool PuestodetrabajoExists(int id)
         {
-            return _context.Suplidores.Any(e => e.SuplidoresID == id);
+            return _context.Puestodetrabajo.Any(e => e.PuestodetrabajoID == id);
         }
     }
 }

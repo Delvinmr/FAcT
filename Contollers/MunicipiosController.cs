@@ -8,25 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class ClientesController : Controller
+    public class MunicipiosController : Controller
     {
         private readonly FAcTContext _context;
 
-        public ClientesController(FAcTContext context)
+        public MunicipiosController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Clientes
+        // GET: Municipios
         public async Task<IActionResult> Index()
         {
-            var fAcTContext = _context.Clientes.Include(c => c.pais).Include(c => c.provincia);
+            var fAcTContext = _context.Municipio.Include(m => m.Provincia);
             return View(await fAcTContext.ToListAsync());
         }
 
-        // GET: Clientes/Details/5
+        // GET: Municipios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +34,42 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes
-                .Include(c => c.pais)
-                .Include(c => c.provincia)
-                .FirstOrDefaultAsync(m => m.clienteID == id);
-            if (clientes == null)
+            var municipio = await _context.Municipio
+                .Include(m => m.Provincia)
+                .FirstOrDefaultAsync(m => m.municipioID == id);
+            if (municipio == null)
             {
                 return NotFound();
             }
 
-            return View(clientes);
+            return View(municipio);
         }
 
-        // GET: Clientes/Create
+        // GET: Municipios/Create
         public IActionResult Create()
         {
-            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais");
             ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia");
             return View();
         }
 
-        // POST: Clientes/Create
+        // POST: Municipios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("clienteID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,tipodocumentoID,ClasfclientesID,paisID,provinciaID")] Clientes clientes)
+        public async Task<IActionResult> Create([Bind("municipioID,nombre_municipio,provinciaID")] Municipio municipio)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(clientes);
+                _context.Add(municipio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais", clientes.paisID);
-            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", clientes.provinciaID);
-            return View(clientes);
+            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", municipio.provinciaID);
+            return View(municipio);
         }
 
-        // GET: Clientes/Edit/5
+        // GET: Municipios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +77,23 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes.FindAsync(id);
-            if (clientes == null)
+            var municipio = await _context.Municipio.FindAsync(id);
+            if (municipio == null)
             {
                 return NotFound();
             }
-            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais", clientes.paisID);
-            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", clientes.provinciaID);
-            return View(clientes);
+            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", municipio.provinciaID);
+            return View(municipio);
         }
 
-        // POST: Clientes/Edit/5
+        // POST: Municipios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("clienteID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,tipodocumentoID,ClasfclientesID,paisID,provinciaID")] Clientes clientes)
+        public async Task<IActionResult> Edit(int id, [Bind("municipioID,nombre_municipio,provinciaID")] Municipio municipio)
         {
-            if (id != clientes.clienteID)
+            if (id != municipio.municipioID)
             {
                 return NotFound();
             }
@@ -106,12 +102,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(clientes);
+                    _context.Update(municipio);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClientesExists(clientes.clienteID))
+                    if (!MunicipioExists(municipio.municipioID))
                     {
                         return NotFound();
                     }
@@ -122,12 +118,11 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais", clientes.paisID);
-            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", clientes.provinciaID);
-            return View(clientes);
+            ViewData["provinciaID"] = new SelectList(_context.Provincia, "provinciaID", "nombre_provincia", municipio.provinciaID);
+            return View(municipio);
         }
 
-        // GET: Clientes/Delete/5
+        // GET: Municipios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,32 +130,31 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes
-                .Include(c => c.pais)
-                .Include(c => c.provincia)
-                .FirstOrDefaultAsync(m => m.clienteID == id);
-            if (clientes == null)
+            var municipio = await _context.Municipio
+                .Include(m => m.Provincia)
+                .FirstOrDefaultAsync(m => m.municipioID == id);
+            if (municipio == null)
             {
                 return NotFound();
             }
 
-            return View(clientes);
+            return View(municipio);
         }
 
-        // POST: Clientes/Delete/5
+        // POST: Municipios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var clientes = await _context.Clientes.FindAsync(id);
-            _context.Clientes.Remove(clientes);
+            var municipio = await _context.Municipio.FindAsync(id);
+            _context.Municipio.Remove(municipio);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClientesExists(int id)
+        private bool MunicipioExists(int id)
         {
-            return _context.Clientes.Any(e => e.clienteID == id);
+            return _context.Municipio.Any(e => e.municipioID == id);
         }
     }
 }

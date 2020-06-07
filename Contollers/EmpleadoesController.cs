@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
     public class EmpleadoesController : Controller
     {
@@ -22,7 +22,7 @@ namespace FAcT.Controllers
         // GET: Empleadoes
         public async Task<IActionResult> Index()
         {
-            var fAcTContext = _context.Empleado.Include(e => e.Empresa).Include(e => e.Puestodetrabajo);
+            var fAcTContext = _context.Empleado.Include(e => e.Empresa).Include(e => e.Puestodetrabajo).Include(e => e.tiposdocumentos);
             return View(await fAcTContext.ToListAsync());
         }
 
@@ -37,6 +37,7 @@ namespace FAcT.Controllers
             var empleado = await _context.Empleado
                 .Include(e => e.Empresa)
                 .Include(e => e.Puestodetrabajo)
+                .Include(e => e.tiposdocumentos)
                 .FirstOrDefaultAsync(m => m.empleadoID == id);
             if (empleado == null)
             {
@@ -50,7 +51,8 @@ namespace FAcT.Controllers
         public IActionResult Create()
         {
             ViewData["empresaID"] = new SelectList(_context.Empresa, "empresaID", "Descripcion");
-            ViewData["puestodetrabID"] = new SelectList(_context.Puestodetrabajo, "puestodetrabID", "Descripcion");
+            ViewData["PuestodetrabajoID"] = new SelectList(_context.Puestodetrabajo, "PuestodetrabajoID", "Descripcion");
+            ViewData["tiposdocumentosID"] = new SelectList(_context.Tiposdocumentos, "tiposdocumentosID", "Descripcion");
             return View();
         }
 
@@ -59,7 +61,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("empleadoID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,empresaID,puestodetrabID")] Empleado empleado)
+        public async Task<IActionResult> Create([Bind("empleadoID,nombre,apellidos,tiposdocumentosID,Documento,Direccion,Telefono,Celular,Correo,empresaID,PuestodetrabajoID")] Empleado empleado)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +70,8 @@ namespace FAcT.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["empresaID"] = new SelectList(_context.Empresa, "empresaID", "Descripcion", empleado.empresaID);
-            ViewData["puestodetrabID"] = new SelectList(_context.Puestodetrabajo, "puestodetrabID", "Descripcion", empleado.puestodetrabID);
+            ViewData["PuestodetrabajoID"] = new SelectList(_context.Puestodetrabajo, "PuestodetrabajoID", "Descripcion", empleado.PuestodetrabajoID);
+            ViewData["tiposdocumentosID"] = new SelectList(_context.Tiposdocumentos, "tiposdocumentosID", "Descripcion", empleado.tiposdocumentosID);
             return View(empleado);
         }
 
@@ -86,7 +89,8 @@ namespace FAcT.Controllers
                 return NotFound();
             }
             ViewData["empresaID"] = new SelectList(_context.Empresa, "empresaID", "Descripcion", empleado.empresaID);
-            ViewData["puestodetrabID"] = new SelectList(_context.Puestodetrabajo, "puestodetrabID", "Descripcion", empleado.puestodetrabID);
+            ViewData["PuestodetrabajoID"] = new SelectList(_context.Puestodetrabajo, "PuestodetrabajoID", "Descripcion", empleado.PuestodetrabajoID);
+            ViewData["tiposdocumentosID"] = new SelectList(_context.Tiposdocumentos, "tiposdocumentosID", "Descripcion", empleado.tiposdocumentosID);
             return View(empleado);
         }
 
@@ -95,7 +99,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("empleadoID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo,empresaID,puestodetrabID")] Empleado empleado)
+        public async Task<IActionResult> Edit(int id, [Bind("empleadoID,nombre,apellidos,tiposdocumentosID,Documento,Direccion,Telefono,Celular,Correo,empresaID,PuestodetrabajoID")] Empleado empleado)
         {
             if (id != empleado.empleadoID)
             {
@@ -123,7 +127,8 @@ namespace FAcT.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["empresaID"] = new SelectList(_context.Empresa, "empresaID", "Descripcion", empleado.empresaID);
-            ViewData["puestodetrabID"] = new SelectList(_context.Puestodetrabajo, "puestodetrabID", "Descripcion", empleado.puestodetrabID);
+            ViewData["PuestodetrabajoID"] = new SelectList(_context.Puestodetrabajo, "PuestodetrabajoID", "Descripcion", empleado.PuestodetrabajoID);
+            ViewData["tiposdocumentosID"] = new SelectList(_context.Tiposdocumentos, "tiposdocumentosID", "Descripcion", empleado.tiposdocumentosID);
             return View(empleado);
         }
 
@@ -138,6 +143,7 @@ namespace FAcT.Controllers
             var empleado = await _context.Empleado
                 .Include(e => e.Empresa)
                 .Include(e => e.Puestodetrabajo)
+                .Include(e => e.tiposdocumentos)
                 .FirstOrDefaultAsync(m => m.empleadoID == id);
             if (empleado == null)
             {

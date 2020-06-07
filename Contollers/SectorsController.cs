@@ -8,24 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class TiposdocumentosController : Controller
+    public class SectorsController : Controller
     {
         private readonly FAcTContext _context;
 
-        public TiposdocumentosController(FAcTContext context)
+        public SectorsController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Tiposdocumentos
+        // GET: Sectors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Tiposdocumentos.ToListAsync());
+            var fAcTContext = _context.Sector.Include(s => s.municipio);
+            return View(await fAcTContext.ToListAsync());
         }
 
-        // GET: Tiposdocumentos/Details/5
+        // GET: Sectors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,42 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var tiposdocumentos = await _context.Tiposdocumentos
-                .FirstOrDefaultAsync(m => m.tipodocumentoID == id);
-            if (tiposdocumentos == null)
+            var sector = await _context.Sector
+                .Include(s => s.municipio)
+                .FirstOrDefaultAsync(m => m.sectorID == id);
+            if (sector == null)
             {
                 return NotFound();
             }
 
-            return View(tiposdocumentos);
+            return View(sector);
         }
 
-        // GET: Tiposdocumentos/Create
+        // GET: Sectors/Create
         public IActionResult Create()
         {
+            ViewData["municipioID"] = new SelectList(_context.Municipio, "municipioID", "nombre_municipio");
             return View();
         }
 
-        // POST: Tiposdocumentos/Create
+        // POST: Sectors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("tipodocumentoID,Descripcion")] Tiposdocumentos tiposdocumentos)
+        public async Task<IActionResult> Create([Bind("sectorID,nombre_sector,municipioID")] Sector sector)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tiposdocumentos);
+                _context.Add(sector);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tiposdocumentos);
+            ViewData["municipioID"] = new SelectList(_context.Municipio, "municipioID", "nombre_municipio", sector.municipioID);
+            return View(sector);
         }
 
-        // GET: Tiposdocumentos/Edit/5
+        // GET: Sectors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +77,23 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var tiposdocumentos = await _context.Tiposdocumentos.FindAsync(id);
-            if (tiposdocumentos == null)
+            var sector = await _context.Sector.FindAsync(id);
+            if (sector == null)
             {
                 return NotFound();
             }
-            return View(tiposdocumentos);
+            ViewData["municipioID"] = new SelectList(_context.Municipio, "municipioID", "nombre_municipio", sector.municipioID);
+            return View(sector);
         }
 
-        // POST: Tiposdocumentos/Edit/5
+        // POST: Sectors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("tipodocumentoID,Descripcion")] Tiposdocumentos tiposdocumentos)
+        public async Task<IActionResult> Edit(int id, [Bind("sectorID,nombre_sector,municipioID")] Sector sector)
         {
-            if (id != tiposdocumentos.tipodocumentoID)
+            if (id != sector.sectorID)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(tiposdocumentos);
+                    _context.Update(sector);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TiposdocumentosExists(tiposdocumentos.tipodocumentoID))
+                    if (!SectorExists(sector.sectorID))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,11 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tiposdocumentos);
+            ViewData["municipioID"] = new SelectList(_context.Municipio, "municipioID", "nombre_municipio", sector.municipioID);
+            return View(sector);
         }
 
-        // GET: Tiposdocumentos/Delete/5
+        // GET: Sectors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +130,31 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var tiposdocumentos = await _context.Tiposdocumentos
-                .FirstOrDefaultAsync(m => m.tipodocumentoID == id);
-            if (tiposdocumentos == null)
+            var sector = await _context.Sector
+                .Include(s => s.municipio)
+                .FirstOrDefaultAsync(m => m.sectorID == id);
+            if (sector == null)
             {
                 return NotFound();
             }
 
-            return View(tiposdocumentos);
+            return View(sector);
         }
 
-        // POST: Tiposdocumentos/Delete/5
+        // POST: Sectors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tiposdocumentos = await _context.Tiposdocumentos.FindAsync(id);
-            _context.Tiposdocumentos.Remove(tiposdocumentos);
+            var sector = await _context.Sector.FindAsync(id);
+            _context.Sector.Remove(sector);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TiposdocumentosExists(int id)
+        private bool SectorExists(int id)
         {
-            return _context.Tiposdocumentos.Any(e => e.tipodocumentoID == id);
+            return _context.Sector.Any(e => e.sectorID == id);
         }
     }
 }

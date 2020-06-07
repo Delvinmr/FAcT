@@ -12,7 +12,7 @@ namespace FAcT.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int puestodetrabID { get; set; }
+        public int PuestodetrabajoID { get; set; }
      
         [Required]
         [MaxLength(50)]

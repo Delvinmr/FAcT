@@ -12,7 +12,7 @@ namespace FAcT.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int monedaID { get; set; }
+        public int MonedaID { get; set; }
    
         [Required]
         [MaxLength(50)]

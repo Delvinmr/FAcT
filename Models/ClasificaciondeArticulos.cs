@@ -12,7 +12,7 @@ namespace FAcT.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int ClasifarticulosID { get; set; }
+        public int ClasificaciondeArticulosID { get; set; }
      
         [Required]
         [MaxLength(50)]

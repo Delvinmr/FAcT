@@ -24,14 +24,9 @@
                 <span asp-validation-for="Precio" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Itebis" class="control-label"></label>
-                <input asp-for="Itebis" class="form-control" />
-                <span asp-validation-for="Itebis" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="unidaddemedisID" class="control-label"></label>
-                <input asp-for="unidaddemedisID" class="form-control" />
-                <span asp-validation-for="unidaddemedisID" class="text-danger"></span>
+                <label asp-for="unidaddemedidasID" class="control-label"></label>
+                <select asp-for="unidaddemedidasID" class="form-control" asp-items="ViewBag.unidaddemedidasID"></select>
+                <span asp-validation-for="unidaddemedidasID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="marcaID" class="control-label"></label>
@@ -39,14 +34,19 @@
                 <span asp-validation-for="marcaID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClasifarticulosID" class="control-label"></label>
-                <input asp-for="ClasifarticulosID" class="form-control" />
-                <span asp-validation-for="ClasifarticulosID" class="text-danger"></span>
+                <label asp-for="ClasificaciondeArticulosID" class="control-label"></label>
+                <select asp-for="ClasificaciondeArticulosID" class="form-control" asp-items="ViewBag.ClasificaciondeArticulosID"></select>
+                <span asp-validation-for="ClasificaciondeArticulosID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ubicacionID" class="control-label"></label>
                 <select asp-for="ubicacionID" class="form-control" asp-items="ViewBag.ubicacionID"></select>
                 <span asp-validation-for="ubicacionID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="statusID" class="control-label"></label>
+                <select asp-for="statusID" class="form-control" asp-items="ViewBag.statusID"></select>
+                <span asp-validation-for="statusID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

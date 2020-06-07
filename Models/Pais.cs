@@ -20,5 +20,12 @@ namespace FAcT.Models
         [StringLength(50)]
         [Display(Name = "Nombre Pais")]
         public string nombre_pais { get; set; }
+
+        [Required]
+        [Display(Name = "Moneda")]
+        [ForeignKey("Moneda")]
+        public int MonedaID { get; set; }
+        public Moneda Moneda { get; set; }
+
     }
 }

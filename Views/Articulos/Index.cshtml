@@ -19,25 +19,26 @@
                 @Html.DisplayNameFor(model => model.Precio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Itebis)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.unidaddemedisID)
+                @Html.DisplayNameFor(model => model.unidaddemedidas)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.marca)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClasifarticulosID)
+                @Html.DisplayNameFor(model => model.ClasificaciondeArticulos)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ubicacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model) 
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Descripcion)
@@ -46,19 +47,19 @@
                 @Html.DisplayFor(modelItem => item.Precio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Itebis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.unidaddemedisID)
+                @Html.DisplayFor(modelItem => item.unidaddemedidas.Descripcion)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.marca.Descripcion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ClasifarticulosID)
+                @Html.DisplayFor(modelItem => item.ClasificaciondeArticulos.Descripcion)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ubicacion.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.Descripcion)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.articulosID">Edit</a> |

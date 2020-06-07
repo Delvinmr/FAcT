@@ -8,24 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class PuestodetrabajoesController : Controller
+    public class TasadecambiosController : Controller
     {
         private readonly FAcTContext _context;
 
-        public PuestodetrabajoesController(FAcTContext context)
+        public TasadecambiosController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Puestodetrabajoes
+        // GET: Tasadecambios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Puestodetrabajo.ToListAsync());
+            return View(await _context.Tasadecambio.ToListAsync());
         }
 
-        // GET: Puestodetrabajoes/Details/5
+        // GET: Tasadecambios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var puestodetrabajo = await _context.Puestodetrabajo
-                .FirstOrDefaultAsync(m => m.puestodetrabID == id);
-            if (puestodetrabajo == null)
+            var tasadecambio = await _context.Tasadecambio
+                .FirstOrDefaultAsync(m => m.tasadecambioID == id);
+            if (tasadecambio == null)
             {
                 return NotFound();
             }
 
-            return View(puestodetrabajo);
+            return View(tasadecambio);
         }
 
-        // GET: Puestodetrabajoes/Create
+        // GET: Tasadecambios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Puestodetrabajoes/Create
+        // POST: Tasadecambios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("puestodetrabID,Descripcion")] Puestodetrabajo puestodetrabajo)
+        public async Task<IActionResult> Create([Bind("tasadecambioID,Descripcion")] Tasadecambio tasadecambio)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(puestodetrabajo);
+                _context.Add(tasadecambio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(puestodetrabajo);
+            return View(tasadecambio);
         }
 
-        // GET: Puestodetrabajoes/Edit/5
+        // GET: Tasadecambios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var puestodetrabajo = await _context.Puestodetrabajo.FindAsync(id);
-            if (puestodetrabajo == null)
+            var tasadecambio = await _context.Tasadecambio.FindAsync(id);
+            if (tasadecambio == null)
             {
                 return NotFound();
             }
-            return View(puestodetrabajo);
+            return View(tasadecambio);
         }
 
-        // POST: Puestodetrabajoes/Edit/5
+        // POST: Tasadecambios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("puestodetrabID,Descripcion")] Puestodetrabajo puestodetrabajo)
+        public async Task<IActionResult> Edit(int id, [Bind("tasadecambioID,Descripcion")] Tasadecambio tasadecambio)
         {
-            if (id != puestodetrabajo.puestodetrabID)
+            if (id != tasadecambio.tasadecambioID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(puestodetrabajo);
+                    _context.Update(tasadecambio);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PuestodetrabajoExists(puestodetrabajo.puestodetrabID))
+                    if (!TasadecambioExists(tasadecambio.tasadecambioID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(puestodetrabajo);
+            return View(tasadecambio);
         }
 
-        // GET: Puestodetrabajoes/Delete/5
+        // GET: Tasadecambios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var puestodetrabajo = await _context.Puestodetrabajo
-                .FirstOrDefaultAsync(m => m.puestodetrabID == id);
-            if (puestodetrabajo == null)
+            var tasadecambio = await _context.Tasadecambio
+                .FirstOrDefaultAsync(m => m.tasadecambioID == id);
+            if (tasadecambio == null)
             {
                 return NotFound();
             }
 
-            return View(puestodetrabajo);
+            return View(tasadecambio);
         }
 
-        // POST: Puestodetrabajoes/Delete/5
+        // POST: Tasadecambios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var puestodetrabajo = await _context.Puestodetrabajo.FindAsync(id);
-            _context.Puestodetrabajo.Remove(puestodetrabajo);
+            var tasadecambio = await _context.Tasadecambio.FindAsync(id);
+            _context.Tasadecambio.Remove(tasadecambio);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PuestodetrabajoExists(int id)
+        private bool TasadecambioExists(int id)
         {
-            return _context.Puestodetrabajo.Any(e => e.puestodetrabID == id);
+            return _context.Tasadecambio.Any(e => e.tasadecambioID == id);
         }
     }
 }

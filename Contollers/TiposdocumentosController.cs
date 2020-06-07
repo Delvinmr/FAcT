@@ -8,24 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class FormadepagoesController : Controller
+    public class TiposdocumentosController : Controller
     {
         private readonly FAcTContext _context;
 
-        public FormadepagoesController(FAcTContext context)
+        public TiposdocumentosController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Formadepagoes
+        // GET: Tiposdocumentos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Formadepago.ToListAsync());
+            return View(await _context.Tiposdocumentos.ToListAsync());
         }
 
-        // GET: Formadepagoes/Details/5
+        // GET: Tiposdocumentos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var formadepago = await _context.Formadepago
-                .FirstOrDefaultAsync(m => m.formadepagoID == id);
-            if (formadepago == null)
+            var tiposdocumentos = await _context.Tiposdocumentos
+                .FirstOrDefaultAsync(m => m.tiposdocumentosID == id);
+            if (tiposdocumentos == null)
             {
                 return NotFound();
             }
 
-            return View(formadepago);
+            return View(tiposdocumentos);
         }
 
-        // GET: Formadepagoes/Create
+        // GET: Tiposdocumentos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Formadepagoes/Create
+        // POST: Tiposdocumentos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("formadepagoID,Descripcion")] Formadepago formadepago)
+        public async Task<IActionResult> Create([Bind("tiposdocumentosID,Descripcion")] Tiposdocumentos tiposdocumentos)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(formadepago);
+                _context.Add(tiposdocumentos);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(formadepago);
+            return View(tiposdocumentos);
         }
 
-        // GET: Formadepagoes/Edit/5
+        // GET: Tiposdocumentos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var formadepago = await _context.Formadepago.FindAsync(id);
-            if (formadepago == null)
+            var tiposdocumentos = await _context.Tiposdocumentos.FindAsync(id);
+            if (tiposdocumentos == null)
             {
                 return NotFound();
             }
-            return View(formadepago);
+            return View(tiposdocumentos);
         }
 
-        // POST: Formadepagoes/Edit/5
+        // POST: Tiposdocumentos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("formadepagoID,Descripcion")] Formadepago formadepago)
+        public async Task<IActionResult> Edit(int id, [Bind("tiposdocumentosID,Descripcion")] Tiposdocumentos tiposdocumentos)
         {
-            if (id != formadepago.formadepagoID)
+            if (id != tiposdocumentos.tiposdocumentosID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(formadepago);
+                    _context.Update(tiposdocumentos);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FormadepagoExists(formadepago.formadepagoID))
+                    if (!TiposdocumentosExists(tiposdocumentos.tiposdocumentosID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(formadepago);
+            return View(tiposdocumentos);
         }
 
-        // GET: Formadepagoes/Delete/5
+        // GET: Tiposdocumentos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var formadepago = await _context.Formadepago
-                .FirstOrDefaultAsync(m => m.formadepagoID == id);
-            if (formadepago == null)
+            var tiposdocumentos = await _context.Tiposdocumentos
+                .FirstOrDefaultAsync(m => m.tiposdocumentosID == id);
+            if (tiposdocumentos == null)
             {
                 return NotFound();
             }
 
-            return View(formadepago);
+            return View(tiposdocumentos);
         }
 
-        // POST: Formadepagoes/Delete/5
+        // POST: Tiposdocumentos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var formadepago = await _context.Formadepago.FindAsync(id);
-            _context.Formadepago.Remove(formadepago);
+            var tiposdocumentos = await _context.Tiposdocumentos.FindAsync(id);
+            _context.Tiposdocumentos.Remove(tiposdocumentos);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FormadepagoExists(int id)
+        private bool TiposdocumentosExists(int id)
         {
-            return _context.Formadepago.Any(e => e.formadepagoID == id);
+            return _context.Tiposdocumentos.Any(e => e.tiposdocumentosID == id);
         }
     }
 }

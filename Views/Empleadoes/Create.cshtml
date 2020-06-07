@@ -23,6 +23,10 @@
                 <span asp-validation-for="apellidos" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="tiposdocumentosID" class="control-label"></label>
+                <select asp-for="tiposdocumentosID" class ="form-control" asp-items="ViewBag.tiposdocumentosID"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="Documento" class="control-label"></label>
                 <input asp-for="Documento" class="form-control" />
                 <span asp-validation-for="Documento" class="text-danger"></span>
@@ -52,8 +56,8 @@
                 <select asp-for="empresaID" class ="form-control" asp-items="ViewBag.empresaID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="puestodetrabID" class="control-label"></label>
-                <select asp-for="puestodetrabID" class ="form-control" asp-items="ViewBag.puestodetrabID"></select>
+                <label asp-for="PuestodetrabajoID" class="control-label"></label>
+                <select asp-for="PuestodetrabajoID" class ="form-control" asp-items="ViewBag.PuestodetrabajoID"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

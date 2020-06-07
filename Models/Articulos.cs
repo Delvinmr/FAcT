@@ -20,19 +20,15 @@ namespace FAcT.Models
         public string Descripcion { get; set; }
 
         [Required]
-        [MaxLength(50)]
         [Display(Name = "precio")]
         public decimal Precio { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        [Display(Name = "Itebis")]
-        public decimal Itebis { get; set; }
+      
 
         [Required]
         [Display(Name = "Unidad")]
-        [ForeignKey("unidaddemedis")]
-        public int unidaddemedisID { get; set; }
+        [ForeignKey("unidaddemedidas")]
+        public int unidaddemedidasID { get; set; }
 
         public Unidaddemedidas unidaddemedidas { get; set; }
 
@@ -45,8 +41,8 @@ namespace FAcT.Models
 
         [Required]
         [Display(Name = "Clasificacion de Articulos")]
-        [ForeignKey("Clasifarticulos")]
-        public int ClasifarticulosID { get; set; }
+        [ForeignKey("ClasificaciondeArticulos")]
+        public int ClasificaciondeArticulosID { get; set; }
         public ClasificaciondeArticulos ClasificaciondeArticulos { get; set; }
 
         [Required]
@@ -54,6 +50,13 @@ namespace FAcT.Models
         [ForeignKey("Ubicacion")]
         public int ubicacionID { get; set; }
         public Ubicacion ubicacion { get; set; }
+
+        [Required]
+        [Display(Name = "Status")]
+        [ForeignKey("status")]
+        public int statusID { get; set; }
+
+        public Status Status { get; set; }
 
     }
 }

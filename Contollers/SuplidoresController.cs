@@ -8,24 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class ClasificacionclientesController : Controller
+    public class SuplidoresController : Controller
     {
         private readonly FAcTContext _context;
 
-        public ClasificacionclientesController(FAcTContext context)
+        public SuplidoresController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Clasificacionclientes
+        // GET: Suplidores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clasificacionclientes.ToListAsync());
+            var fAcTContext = _context.Suplidores.Include(s => s.Clasificacionsuplidores);
+            return View(await fAcTContext.ToListAsync());
         }
 
-        // GET: Clasificacionclientes/Details/5
+        // GET: Suplidores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,42 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var clasificacionclientes = await _context.Clasificacionclientes
-                .FirstOrDefaultAsync(m => m.ClasfclientesID == id);
-            if (clasificacionclientes == null)
+            var suplidores = await _context.Suplidores
+                .Include(s => s.Clasificacionsuplidores)
+                .FirstOrDefaultAsync(m => m.SuplidoresID == id);
+            if (suplidores == null)
             {
                 return NotFound();
             }
 
-            return View(clasificacionclientes);
+            return View(suplidores);
         }
 
-        // GET: Clasificacionclientes/Create
+        // GET: Suplidores/Create
         public IActionResult Create()
         {
+            ViewData["ClasificacionsuplidoresID"] = new SelectList(_context.Clasificacionsuplidores, "ClasificacionsuplidoresID", "Descripcion");
             return View();
         }
 
-        // POST: Clasificacionclientes/Create
+        // POST: Suplidores/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClasfclientesID,Descripcion")] Clasificacionclientes clasificacionclientes)
+        public async Task<IActionResult> Create([Bind("SuplidoresID,nombre,Direccion,Telefono,Correo,ClasificacionsuplidoresID")] Suplidores suplidores)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(clasificacionclientes);
+                _context.Add(suplidores);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(clasificacionclientes);
+            ViewData["ClasificacionsuplidoresID"] = new SelectList(_context.Clasificacionsuplidores, "ClasificacionsuplidoresID", "Descripcion", suplidores.ClasificacionsuplidoresID);
+            return View(suplidores);
         }
 
-        // GET: Clasificacionclientes/Edit/5
+        // GET: Suplidores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +77,23 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var clasificacionclientes = await _context.Clasificacionclientes.FindAsync(id);
-            if (clasificacionclientes == null)
+            var suplidores = await _context.Suplidores.FindAsync(id);
+            if (suplidores == null)
             {
                 return NotFound();
             }
-            return View(clasificacionclientes);
+            ViewData["ClasificacionsuplidoresID"] = new SelectList(_context.Clasificacionsuplidores, "ClasificacionsuplidoresID", "Descripcion", suplidores.ClasificacionsuplidoresID);
+            return View(suplidores);
         }
 
-        // POST: Clasificacionclientes/Edit/5
+        // POST: Suplidores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClasfclientesID,Descripcion")] Clasificacionclientes clasificacionclientes)
+        public async Task<IActionResult> Edit(int id, [Bind("SuplidoresID,nombre,Direccion,Telefono,Correo,ClasificacionsuplidoresID")] Suplidores suplidores)
         {
-            if (id != clasificacionclientes.ClasfclientesID)
+            if (id != suplidores.SuplidoresID)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(clasificacionclientes);
+                    _context.Update(suplidores);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClasificacionclientesExists(clasificacionclientes.ClasfclientesID))
+                    if (!SuplidoresExists(suplidores.SuplidoresID))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,11 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(clasificacionclientes);
+            ViewData["ClasificacionsuplidoresID"] = new SelectList(_context.Clasificacionsuplidores, "ClasificacionsuplidoresID", "Descripcion", suplidores.ClasificacionsuplidoresID);
+            return View(suplidores);
         }
 
-        // GET: Clasificacionclientes/Delete/5
+        // GET: Suplidores/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +130,31 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var clasificacionclientes = await _context.Clasificacionclientes
-                .FirstOrDefaultAsync(m => m.ClasfclientesID == id);
-            if (clasificacionclientes == null)
+            var suplidores = await _context.Suplidores
+                .Include(s => s.Clasificacionsuplidores)
+                .FirstOrDefaultAsync(m => m.SuplidoresID == id);
+            if (suplidores == null)
             {
                 return NotFound();
             }
 
-            return View(clasificacionclientes);
+            return View(suplidores);
         }
 
-        // POST: Clasificacionclientes/Delete/5
+        // POST: Suplidores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var clasificacionclientes = await _context.Clasificacionclientes.FindAsync(id);
-            _context.Clasificacionclientes.Remove(clasificacionclientes);
+            var suplidores = await _context.Suplidores.FindAsync(id);
+            _context.Suplidores.Remove(suplidores);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClasificacionclientesExists(int id)
+        private bool SuplidoresExists(int id)
         {
-            return _context.Clasificacionclientes.Any(e => e.ClasfclientesID == id);
+            return _context.Suplidores.Any(e => e.SuplidoresID == id);
         }
     }
 }

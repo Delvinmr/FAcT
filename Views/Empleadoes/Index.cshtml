@@ -18,6 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.apellidos)
             </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Documento)
             </th>
@@ -33,12 +34,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Correo)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Puestodetrabajo)
-            </th>
+           
+            
             <th></th>
         </tr>
     </thead>
@@ -51,6 +48,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.apellidos)
             </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Documento)
             </td>
@@ -66,12 +64,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Correo)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Empresa.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Puestodetrabajo.Descripcion)
-            </td>
+            
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.empleadoID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.empleadoID">Details</a> |

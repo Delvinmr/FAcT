@@ -12,7 +12,7 @@ namespace FAcT.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int tipodocumentoID { get; set; }
+        public int tiposdocumentosID { get; set; }
         
         [Required]
         [MaxLength(50)]

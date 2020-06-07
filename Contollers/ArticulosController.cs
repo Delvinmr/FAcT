@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
     public class ArticulosController : Controller
     {
@@ -22,7 +22,7 @@ namespace FAcT.Controllers
         // GET: Articulos
         public async Task<IActionResult> Index()
         {
-            var fAcTContext = _context.Articulos.Include(a => a.marca).Include(a => a.ubicacion);
+            var fAcTContext = _context.Articulos.Include(a => a.ClasificaciondeArticulos).Include(a => a.Status).Include(a => a.marca).Include(a => a.ubicacion).Include(a => a.unidaddemedidas);
             return View(await fAcTContext.ToListAsync());
         }
 
@@ -35,8 +35,11 @@ namespace FAcT.Controllers
             }
 
             var articulos = await _context.Articulos
+                .Include(a => a.ClasificaciondeArticulos)
+                .Include(a => a.Status)
                 .Include(a => a.marca)
                 .Include(a => a.ubicacion)
+                .Include(a => a.unidaddemedidas)
                 .FirstOrDefaultAsync(m => m.articulosID == id);
             if (articulos == null)
             {
@@ -49,8 +52,11 @@ namespace FAcT.Controllers
         // GET: Articulos/Create
         public IActionResult Create()
         {
+            ViewData["ClasificaciondeArticulosID"] = new SelectList(_context.ClasificaciondeArticulos, "ClasificaciondeArticulosID", "Descripcion");
+            ViewData["statusID"] = new SelectList(_context.Status, "statusID", "Descripcion");
             ViewData["marcaID"] = new SelectList(_context.Marca, "marcaID", "Descripcion");
             ViewData["ubicacionID"] = new SelectList(_context.Ubicacion, "ubicacionID", "Descripcion");
+            ViewData["unidaddemedidasID"] = new SelectList(_context.Unidaddemedidas, "unidaddemedidasID", "Descripcion");
             return View();
         }
 
@@ -59,7 +65,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("articulosID,Descripcion,Precio,Itebis,unidaddemedisID,marcaID,ClasifarticulosID,ubicacionID")] Articulos articulos)
+        public async Task<IActionResult> Create([Bind("articulosID,Descripcion,Precio,unidaddemedidasID,marcaID,ClasificaciondeArticulosID,ubicacionID,statusID")] Articulos articulos)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +73,11 @@ namespace FAcT.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClasificaciondeArticulosID"] = new SelectList(_context.ClasificaciondeArticulos, "ClasificaciondeArticulosID", "Descripcion", articulos.ClasificaciondeArticulosID);
+            ViewData["statusID"] = new SelectList(_context.Status, "statusID", "Descripcion", articulos.statusID);
             ViewData["marcaID"] = new SelectList(_context.Marca, "marcaID", "Descripcion", articulos.marcaID);
             ViewData["ubicacionID"] = new SelectList(_context.Ubicacion, "ubicacionID", "Descripcion", articulos.ubicacionID);
+            ViewData["unidaddemedidasID"] = new SelectList(_context.Unidaddemedidas, "unidaddemedidasID", "Descripcion", articulos.unidaddemedidasID);
             return View(articulos);
         }
 
@@ -85,8 +94,11 @@ namespace FAcT.Controllers
             {
                 return NotFound();
             }
+            ViewData["ClasificaciondeArticulosID"] = new SelectList(_context.ClasificaciondeArticulos, "ClasificaciondeArticulosID", "Descripcion", articulos.ClasificaciondeArticulosID);
+            ViewData["statusID"] = new SelectList(_context.Status, "statusID", "Descripcion", articulos.statusID);
             ViewData["marcaID"] = new SelectList(_context.Marca, "marcaID", "Descripcion", articulos.marcaID);
             ViewData["ubicacionID"] = new SelectList(_context.Ubicacion, "ubicacionID", "Descripcion", articulos.ubicacionID);
+            ViewData["unidaddemedidasID"] = new SelectList(_context.Unidaddemedidas, "unidaddemedidasID", "Descripcion", articulos.unidaddemedidasID);
             return View(articulos);
         }
 
@@ -95,7 +107,7 @@ namespace FAcT.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("articulosID,Descripcion,Precio,Itebis,unidaddemedisID,marcaID,ClasifarticulosID,ubicacionID")] Articulos articulos)
+        public async Task<IActionResult> Edit(int id, [Bind("articulosID,Descripcion,Precio,unidaddemedidasID,marcaID,ClasificaciondeArticulosID,ubicacionID,statusID")] Articulos articulos)
         {
             if (id != articulos.articulosID)
             {
@@ -122,8 +134,11 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClasificaciondeArticulosID"] = new SelectList(_context.ClasificaciondeArticulos, "ClasificaciondeArticulosID", "Descripcion", articulos.ClasificaciondeArticulosID);
+            ViewData["statusID"] = new SelectList(_context.Status, "statusID", "Descripcion", articulos.statusID);
             ViewData["marcaID"] = new SelectList(_context.Marca, "marcaID", "Descripcion", articulos.marcaID);
             ViewData["ubicacionID"] = new SelectList(_context.Ubicacion, "ubicacionID", "Descripcion", articulos.ubicacionID);
+            ViewData["unidaddemedidasID"] = new SelectList(_context.Unidaddemedidas, "unidaddemedidasID", "Descripcion", articulos.unidaddemedidasID);
             return View(articulos);
         }
 
@@ -136,8 +151,11 @@ namespace FAcT.Controllers
             }
 
             var articulos = await _context.Articulos
+                .Include(a => a.ClasificaciondeArticulos)
+                .Include(a => a.Status)
                 .Include(a => a.marca)
                 .Include(a => a.ubicacion)
+                .Include(a => a.unidaddemedidas)
                 .FirstOrDefaultAsync(m => m.articulosID == id);
             if (articulos == null)
             {

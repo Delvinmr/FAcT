@@ -8,24 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class TasadecambiosController : Controller
+    public class ClasificacionclientesController : Controller
     {
         private readonly FAcTContext _context;
 
-        public TasadecambiosController(FAcTContext context)
+        public ClasificacionclientesController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Tasadecambios
+        // GET: Clasificacionclientes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Tasadecambio.ToListAsync());
+            return View(await _context.Clasificacionclientes.ToListAsync());
         }
 
-        // GET: Tasadecambios/Details/5
+        // GET: Clasificacionclientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var tasadecambio = await _context.Tasadecambio
-                .FirstOrDefaultAsync(m => m.tasadecambioID == id);
-            if (tasadecambio == null)
+            var clasificacionclientes = await _context.Clasificacionclientes
+                .FirstOrDefaultAsync(m => m.ClasificacionclientesID == id);
+            if (clasificacionclientes == null)
             {
                 return NotFound();
             }
 
-            return View(tasadecambio);
+            return View(clasificacionclientes);
         }
 
-        // GET: Tasadecambios/Create
+        // GET: Clasificacionclientes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Tasadecambios/Create
+        // POST: Clasificacionclientes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("tasadecambioID,Descripcion")] Tasadecambio tasadecambio)
+        public async Task<IActionResult> Create([Bind("ClasificacionclientesID,Descripcion")] Clasificacionclientes clasificacionclientes)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tasadecambio);
+                _context.Add(clasificacionclientes);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tasadecambio);
+            return View(clasificacionclientes);
         }
 
-        // GET: Tasadecambios/Edit/5
+        // GET: Clasificacionclientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var tasadecambio = await _context.Tasadecambio.FindAsync(id);
-            if (tasadecambio == null)
+            var clasificacionclientes = await _context.Clasificacionclientes.FindAsync(id);
+            if (clasificacionclientes == null)
             {
                 return NotFound();
             }
-            return View(tasadecambio);
+            return View(clasificacionclientes);
         }
 
-        // POST: Tasadecambios/Edit/5
+        // POST: Clasificacionclientes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("tasadecambioID,Descripcion")] Tasadecambio tasadecambio)
+        public async Task<IActionResult> Edit(int id, [Bind("ClasificacionclientesID,Descripcion")] Clasificacionclientes clasificacionclientes)
         {
-            if (id != tasadecambio.tasadecambioID)
+            if (id != clasificacionclientes.ClasificacionclientesID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(tasadecambio);
+                    _context.Update(clasificacionclientes);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TasadecambioExists(tasadecambio.tasadecambioID))
+                    if (!ClasificacionclientesExists(clasificacionclientes.ClasificacionclientesID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tasadecambio);
+            return View(clasificacionclientes);
         }
 
-        // GET: Tasadecambios/Delete/5
+        // GET: Clasificacionclientes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var tasadecambio = await _context.Tasadecambio
-                .FirstOrDefaultAsync(m => m.tasadecambioID == id);
-            if (tasadecambio == null)
+            var clasificacionclientes = await _context.Clasificacionclientes
+                .FirstOrDefaultAsync(m => m.ClasificacionclientesID == id);
+            if (clasificacionclientes == null)
             {
                 return NotFound();
             }
 
-            return View(tasadecambio);
+            return View(clasificacionclientes);
         }
 
-        // POST: Tasadecambios/Delete/5
+        // POST: Clasificacionclientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tasadecambio = await _context.Tasadecambio.FindAsync(id);
-            _context.Tasadecambio.Remove(tasadecambio);
+            var clasificacionclientes = await _context.Clasificacionclientes.FindAsync(id);
+            _context.Clasificacionclientes.Remove(clasificacionclientes);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TasadecambioExists(int id)
+        private bool ClasificacionclientesExists(int id)
         {
-            return _context.Tasadecambio.Any(e => e.tasadecambioID == id);
+            return _context.Clasificacionclientes.Any(e => e.ClasificacionclientesID == id);
         }
     }
 }

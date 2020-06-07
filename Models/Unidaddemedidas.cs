@@ -12,7 +12,7 @@ namespace FAcT.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int unidaddemedisID { get; set; }
+        public int unidaddemedidasID { get; set; }
         
         [Required]
         [MaxLength(50)]

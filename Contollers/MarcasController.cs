@@ -8,24 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class VendedoresController : Controller
+    public class MarcasController : Controller
     {
         private readonly FAcTContext _context;
 
-        public VendedoresController(FAcTContext context)
+        public MarcasController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Vendedores
+        // GET: Marcas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Vendedores.ToListAsync());
+            return View(await _context.Marca.ToListAsync());
         }
 
-        // GET: Vendedores/Details/5
+        // GET: Marcas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var vendedores = await _context.Vendedores
-                .FirstOrDefaultAsync(m => m.vendedorID == id);
-            if (vendedores == null)
+            var marca = await _context.Marca
+                .FirstOrDefaultAsync(m => m.marcaID == id);
+            if (marca == null)
             {
                 return NotFound();
             }
 
-            return View(vendedores);
+            return View(marca);
         }
 
-        // GET: Vendedores/Create
+        // GET: Marcas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Vendedores/Create
+        // POST: Marcas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("vendedorID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo")] Vendedores vendedores)
+        public async Task<IActionResult> Create([Bind("marcaID,Descripcion")] Marca marca)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(vendedores);
+                _context.Add(marca);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(vendedores);
+            return View(marca);
         }
 
-        // GET: Vendedores/Edit/5
+        // GET: Marcas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var vendedores = await _context.Vendedores.FindAsync(id);
-            if (vendedores == null)
+            var marca = await _context.Marca.FindAsync(id);
+            if (marca == null)
             {
                 return NotFound();
             }
-            return View(vendedores);
+            return View(marca);
         }
 
-        // POST: Vendedores/Edit/5
+        // POST: Marcas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("vendedorID,nombre,apellidos,Documento,Direccion,Telefono,Celular,Correo")] Vendedores vendedores)
+        public async Task<IActionResult> Edit(int id, [Bind("marcaID,Descripcion")] Marca marca)
         {
-            if (id != vendedores.vendedorID)
+            if (id != marca.marcaID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(vendedores);
+                    _context.Update(marca);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VendedoresExists(vendedores.vendedorID))
+                    if (!MarcaExists(marca.marcaID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(vendedores);
+            return View(marca);
         }
 
-        // GET: Vendedores/Delete/5
+        // GET: Marcas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var vendedores = await _context.Vendedores
-                .FirstOrDefaultAsync(m => m.vendedorID == id);
-            if (vendedores == null)
+            var marca = await _context.Marca
+                .FirstOrDefaultAsync(m => m.marcaID == id);
+            if (marca == null)
             {
                 return NotFound();
             }
 
-            return View(vendedores);
+            return View(marca);
         }
 
-        // POST: Vendedores/Delete/5
+        // POST: Marcas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var vendedores = await _context.Vendedores.FindAsync(id);
-            _context.Vendedores.Remove(vendedores);
+            var marca = await _context.Marca.FindAsync(id);
+            _context.Marca.Remove(marca);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VendedoresExists(int id)
+        private bool MarcaExists(int id)
         {
-            return _context.Vendedores.Any(e => e.vendedorID == id);
+            return _context.Marca.Any(e => e.marcaID == id);
         }
     }
 }

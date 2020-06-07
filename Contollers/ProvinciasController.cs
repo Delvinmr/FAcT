@@ -8,24 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class EmpresasController : Controller
+    public class ProvinciasController : Controller
     {
         private readonly FAcTContext _context;
 
-        public EmpresasController(FAcTContext context)
+        public ProvinciasController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Empresas
+        // GET: Provincias
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Empresa.ToListAsync());
+            var fAcTContext = _context.Provincia.Include(p => p.pais);
+            return View(await fAcTContext.ToListAsync());
         }
 
-        // GET: Empresas/Details/5
+        // GET: Provincias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,42 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresa
-                .FirstOrDefaultAsync(m => m.empresaID == id);
-            if (empresa == null)
+            var provincia = await _context.Provincia
+                .Include(p => p.pais)
+                .FirstOrDefaultAsync(m => m.provinciaID == id);
+            if (provincia == null)
             {
                 return NotFound();
             }
 
-            return View(empresa);
+            return View(provincia);
         }
 
-        // GET: Empresas/Create
+        // GET: Provincias/Create
         public IActionResult Create()
         {
+            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais");
             return View();
         }
 
-        // POST: Empresas/Create
+        // POST: Provincias/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("empresaID,Name,Descripcion")] Empresa empresa)
+        public async Task<IActionResult> Create([Bind("provinciaID,nombre_provincia,paisID")] Provincia provincia)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(empresa);
+                _context.Add(provincia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(empresa);
+            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais", provincia.paisID);
+            return View(provincia);
         }
 
-        // GET: Empresas/Edit/5
+        // GET: Provincias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +77,23 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresa.FindAsync(id);
-            if (empresa == null)
+            var provincia = await _context.Provincia.FindAsync(id);
+            if (provincia == null)
             {
                 return NotFound();
             }
-            return View(empresa);
+            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais", provincia.paisID);
+            return View(provincia);
         }
 
-        // POST: Empresas/Edit/5
+        // POST: Provincias/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("empresaID,Name,Descripcion")] Empresa empresa)
+        public async Task<IActionResult> Edit(int id, [Bind("provinciaID,nombre_provincia,paisID")] Provincia provincia)
         {
-            if (id != empresa.empresaID)
+            if (id != provincia.provinciaID)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(empresa);
+                    _context.Update(provincia);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmpresaExists(empresa.empresaID))
+                    if (!ProvinciaExists(provincia.provinciaID))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,11 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(empresa);
+            ViewData["paisID"] = new SelectList(_context.Pais, "paisID", "nombre_pais", provincia.paisID);
+            return View(provincia);
         }
 
-        // GET: Empresas/Delete/5
+        // GET: Provincias/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +130,31 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresa
-                .FirstOrDefaultAsync(m => m.empresaID == id);
-            if (empresa == null)
+            var provincia = await _context.Provincia
+                .Include(p => p.pais)
+                .FirstOrDefaultAsync(m => m.provinciaID == id);
+            if (provincia == null)
             {
                 return NotFound();
             }
 
-            return View(empresa);
+            return View(provincia);
         }
 
-        // POST: Empresas/Delete/5
+        // POST: Provincias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var empresa = await _context.Empresa.FindAsync(id);
-            _context.Empresa.Remove(empresa);
+            var provincia = await _context.Provincia.FindAsync(id);
+            _context.Provincia.Remove(provincia);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EmpresaExists(int id)
+        private bool ProvinciaExists(int id)
         {
-            return _context.Empresa.Any(e => e.empresaID == id);
+            return _context.Provincia.Any(e => e.provinciaID == id);
         }
     }
 }

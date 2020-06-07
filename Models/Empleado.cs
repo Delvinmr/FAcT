@@ -27,6 +27,12 @@ namespace FAcT.Models
         public string apellidos { get; set; }
 
         [Required]
+        [Display(Name = "Tipos Documentos")]
+        [ForeignKey("tiposdocumentos")]
+        public int tiposdocumentosID { get; set; }
+        public Tiposdocumentos tiposdocumentos { get; set; }
+
+        [Required]
         [MaxLength(20)]
         [Display(Name = "Documento")]
         public string Documento { get; set; }
@@ -60,7 +66,7 @@ namespace FAcT.Models
         [Required]
         [Display(Name = "Puesto de Trabajo")]
         [ForeignKey("Puestodetrabajo")]
-        public int puestodetrabID { get; set; }
+        public int PuestodetrabajoID { get; set; }
         public Puestodetrabajo Puestodetrabajo { get; set; }
 
     }

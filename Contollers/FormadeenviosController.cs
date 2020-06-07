@@ -8,24 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class MonedasController : Controller
+    public class FormadeenviosController : Controller
     {
         private readonly FAcTContext _context;
 
-        public MonedasController(FAcTContext context)
+        public FormadeenviosController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Monedas
+        // GET: Formadeenvios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Moneda.ToListAsync());
+            return View(await _context.Formadeenvio.ToListAsync());
         }
 
-        // GET: Monedas/Details/5
+        // GET: Formadeenvios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var moneda = await _context.Moneda
-                .FirstOrDefaultAsync(m => m.monedaID == id);
-            if (moneda == null)
+            var formadeenvio = await _context.Formadeenvio
+                .FirstOrDefaultAsync(m => m.formadeenvioID == id);
+            if (formadeenvio == null)
             {
                 return NotFound();
             }
 
-            return View(moneda);
+            return View(formadeenvio);
         }
 
-        // GET: Monedas/Create
+        // GET: Formadeenvios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Monedas/Create
+        // POST: Formadeenvios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("monedaID,Descripcion")] Moneda moneda)
+        public async Task<IActionResult> Create([Bind("formadeenvioID,Descripcion")] Formadeenvio formadeenvio)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(moneda);
+                _context.Add(formadeenvio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(moneda);
+            return View(formadeenvio);
         }
 
-        // GET: Monedas/Edit/5
+        // GET: Formadeenvios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var moneda = await _context.Moneda.FindAsync(id);
-            if (moneda == null)
+            var formadeenvio = await _context.Formadeenvio.FindAsync(id);
+            if (formadeenvio == null)
             {
                 return NotFound();
             }
-            return View(moneda);
+            return View(formadeenvio);
         }
 
-        // POST: Monedas/Edit/5
+        // POST: Formadeenvios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("monedaID,Descripcion")] Moneda moneda)
+        public async Task<IActionResult> Edit(int id, [Bind("formadeenvioID,Descripcion")] Formadeenvio formadeenvio)
         {
-            if (id != moneda.monedaID)
+            if (id != formadeenvio.formadeenvioID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(moneda);
+                    _context.Update(formadeenvio);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MonedaExists(moneda.monedaID))
+                    if (!FormadeenvioExists(formadeenvio.formadeenvioID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(moneda);
+            return View(formadeenvio);
         }
 
-        // GET: Monedas/Delete/5
+        // GET: Formadeenvios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var moneda = await _context.Moneda
-                .FirstOrDefaultAsync(m => m.monedaID == id);
-            if (moneda == null)
+            var formadeenvio = await _context.Formadeenvio
+                .FirstOrDefaultAsync(m => m.formadeenvioID == id);
+            if (formadeenvio == null)
             {
                 return NotFound();
             }
 
-            return View(moneda);
+            return View(formadeenvio);
         }
 
-        // POST: Monedas/Delete/5
+        // POST: Formadeenvios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var moneda = await _context.Moneda.FindAsync(id);
-            _context.Moneda.Remove(moneda);
+            var formadeenvio = await _context.Formadeenvio.FindAsync(id);
+            _context.Formadeenvio.Remove(formadeenvio);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MonedaExists(int id)
+        private bool FormadeenvioExists(int id)
         {
-            return _context.Moneda.Any(e => e.monedaID == id);
+            return _context.Formadeenvio.Any(e => e.formadeenvioID == id);
         }
     }
 }

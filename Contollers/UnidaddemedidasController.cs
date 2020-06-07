@@ -8,24 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class ClasificaciondeArticulosController : Controller
+    public class UnidaddemedidasController : Controller
     {
         private readonly FAcTContext _context;
 
-        public ClasificaciondeArticulosController(FAcTContext context)
+        public UnidaddemedidasController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: ClasificaciondeArticulos
+        // GET: Unidaddemedidas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ClasificaciondeArticulos.ToListAsync());
+            return View(await _context.Unidaddemedidas.ToListAsync());
         }
 
-        // GET: ClasificaciondeArticulos/Details/5
+        // GET: Unidaddemedidas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var clasificaciondeArticulos = await _context.ClasificaciondeArticulos
-                .FirstOrDefaultAsync(m => m.ClasifarticulosID == id);
-            if (clasificaciondeArticulos == null)
+            var unidaddemedidas = await _context.Unidaddemedidas
+                .FirstOrDefaultAsync(m => m.unidaddemedidasID == id);
+            if (unidaddemedidas == null)
             {
                 return NotFound();
             }
 
-            return View(clasificaciondeArticulos);
+            return View(unidaddemedidas);
         }
 
-        // GET: ClasificaciondeArticulos/Create
+        // GET: Unidaddemedidas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ClasificaciondeArticulos/Create
+        // POST: Unidaddemedidas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClasifarticulosID,Descripcion")] ClasificaciondeArticulos clasificaciondeArticulos)
+        public async Task<IActionResult> Create([Bind("unidaddemedidasID,Descripcion")] Unidaddemedidas unidaddemedidas)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(clasificaciondeArticulos);
+                _context.Add(unidaddemedidas);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(clasificaciondeArticulos);
+            return View(unidaddemedidas);
         }
 
-        // GET: ClasificaciondeArticulos/Edit/5
+        // GET: Unidaddemedidas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var clasificaciondeArticulos = await _context.ClasificaciondeArticulos.FindAsync(id);
-            if (clasificaciondeArticulos == null)
+            var unidaddemedidas = await _context.Unidaddemedidas.FindAsync(id);
+            if (unidaddemedidas == null)
             {
                 return NotFound();
             }
-            return View(clasificaciondeArticulos);
+            return View(unidaddemedidas);
         }
 
-        // POST: ClasificaciondeArticulos/Edit/5
+        // POST: Unidaddemedidas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClasifarticulosID,Descripcion")] ClasificaciondeArticulos clasificaciondeArticulos)
+        public async Task<IActionResult> Edit(int id, [Bind("unidaddemedidasID,Descripcion")] Unidaddemedidas unidaddemedidas)
         {
-            if (id != clasificaciondeArticulos.ClasifarticulosID)
+            if (id != unidaddemedidas.unidaddemedidasID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(clasificaciondeArticulos);
+                    _context.Update(unidaddemedidas);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClasificaciondeArticulosExists(clasificaciondeArticulos.ClasifarticulosID))
+                    if (!UnidaddemedidasExists(unidaddemedidas.unidaddemedidasID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(clasificaciondeArticulos);
+            return View(unidaddemedidas);
         }
 
-        // GET: ClasificaciondeArticulos/Delete/5
+        // GET: Unidaddemedidas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var clasificaciondeArticulos = await _context.ClasificaciondeArticulos
-                .FirstOrDefaultAsync(m => m.ClasifarticulosID == id);
-            if (clasificaciondeArticulos == null)
+            var unidaddemedidas = await _context.Unidaddemedidas
+                .FirstOrDefaultAsync(m => m.unidaddemedidasID == id);
+            if (unidaddemedidas == null)
             {
                 return NotFound();
             }
 
-            return View(clasificaciondeArticulos);
+            return View(unidaddemedidas);
         }
 
-        // POST: ClasificaciondeArticulos/Delete/5
+        // POST: Unidaddemedidas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var clasificaciondeArticulos = await _context.ClasificaciondeArticulos.FindAsync(id);
-            _context.ClasificaciondeArticulos.Remove(clasificaciondeArticulos);
+            var unidaddemedidas = await _context.Unidaddemedidas.FindAsync(id);
+            _context.Unidaddemedidas.Remove(unidaddemedidas);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClasificaciondeArticulosExists(int id)
+        private bool UnidaddemedidasExists(int id)
         {
-            return _context.ClasificaciondeArticulos.Any(e => e.ClasifarticulosID == id);
+            return _context.Unidaddemedidas.Any(e => e.unidaddemedidasID == id);
         }
     }
 }

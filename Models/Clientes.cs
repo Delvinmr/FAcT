@@ -26,7 +26,13 @@ namespace FAcT.Models
         public string apellidos { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [Display(Name = "Tipos Documentos")]
+        [ForeignKey("tiposdocumentos")]
+        public int tiposdocumentosID { get; set; }
+        public Tiposdocumentos tiposdocumentos { get; set; }
+
+        [Required]
+        [MaxLength(50)]
         [Display(Name = "Documento")]
         public string Documento { get; set; }
 
@@ -51,16 +57,12 @@ namespace FAcT.Models
         [Display(Name = "Correo")]
         public string Correo { get; set; }
 
-        [Required]
-        [Display(Name = "Tipos Documentos")]
-        [ForeignKey("tipodocumento")]
-        public int tipodocumentoID { get; set; }
-        public Tiposdocumentos tiposdocumentos { get; set; }
+        
 
         [Required]
         [Display(Name = "Clasificacion clientes")]
         [ForeignKey("Clasfclientes")]
-        public int ClasfclientesID { get; set; }
+        public int ClasificacionclientesID { get; set; }
         public Clasificacionclientes Clasificacionclientes { get; set; }
 
         [Required]
@@ -70,7 +72,7 @@ namespace FAcT.Models
         public Pais pais { get; set; }
 
         [Required]
-        [Display(Name = "Pais")]
+        [Display(Name = "Provincia")]
         [ForeignKey("provincia")]
         public int provinciaID { get; set; }
         public Provincia provincia { get; set; }

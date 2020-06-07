@@ -8,24 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using FAcT.Data;
 using FAcT.Models;
 
-namespace FAcT.Controllers
+namespace FAcT.Contollers
 {
-    public class StatusController : Controller
+    public class ClasificacionsuplidoresController : Controller
     {
         private readonly FAcTContext _context;
 
-        public StatusController(FAcTContext context)
+        public ClasificacionsuplidoresController(FAcTContext context)
         {
             _context = context;
         }
 
-        // GET: Status
+        // GET: Clasificacionsuplidores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Status.ToListAsync());
+            return View(await _context.Clasificacionsuplidores.ToListAsync());
         }
 
-        // GET: Status/Details/5
+        // GET: Clasificacionsuplidores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var status = await _context.Status
-                .FirstOrDefaultAsync(m => m.statusID == id);
-            if (status == null)
+            var clasificacionsuplidores = await _context.Clasificacionsuplidores
+                .FirstOrDefaultAsync(m => m.ClasificacionsuplidoresID == id);
+            if (clasificacionsuplidores == null)
             {
                 return NotFound();
             }
 
-            return View(status);
+            return View(clasificacionsuplidores);
         }
 
-        // GET: Status/Create
+        // GET: Clasificacionsuplidores/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Status/Create
+        // POST: Clasificacionsuplidores/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("statusID,Descripcion")] Status status)
+        public async Task<IActionResult> Create([Bind("ClasificacionsuplidoresID,Descripcion")] Clasificacionsuplidores clasificacionsuplidores)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(status);
+                _context.Add(clasificacionsuplidores);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(status);
+            return View(clasificacionsuplidores);
         }
 
-        // GET: Status/Edit/5
+        // GET: Clasificacionsuplidores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var status = await _context.Status.FindAsync(id);
-            if (status == null)
+            var clasificacionsuplidores = await _context.Clasificacionsuplidores.FindAsync(id);
+            if (clasificacionsuplidores == null)
             {
                 return NotFound();
             }
-            return View(status);
+            return View(clasificacionsuplidores);
         }
 
-        // POST: Status/Edit/5
+        // POST: Clasificacionsuplidores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("statusID,Descripcion")] Status status)
+        public async Task<IActionResult> Edit(int id, [Bind("ClasificacionsuplidoresID,Descripcion")] Clasificacionsuplidores clasificacionsuplidores)
         {
-            if (id != status.statusID)
+            if (id != clasificacionsuplidores.ClasificacionsuplidoresID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace FAcT.Controllers
             {
                 try
                 {
-                    _context.Update(status);
+                    _context.Update(clasificacionsuplidores);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StatusExists(status.statusID))
+                    if (!ClasificacionsuplidoresExists(clasificacionsuplidores.ClasificacionsuplidoresID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace FAcT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(status);
+            return View(clasificacionsuplidores);
         }
 
-        // GET: Status/Delete/5
+        // GET: Clasificacionsuplidores/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace FAcT.Controllers
                 return NotFound();
             }
 
-            var status = await _context.Status
-                .FirstOrDefaultAsync(m => m.statusID == id);
-            if (status == null)
+            var clasificacionsuplidores = await _context.Clasificacionsuplidores
+                .FirstOrDefaultAsync(m => m.ClasificacionsuplidoresID == id);
+            if (clasificacionsuplidores == null)
             {
                 return NotFound();
             }
 
-            return View(status);
+            return View(clasificacionsuplidores);
         }
 
-        // POST: Status/Delete/5
+        // POST: Clasificacionsuplidores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var status = await _context.Status.FindAsync(id);
-            _context.Status.Remove(status);
+            var clasificacionsuplidores = await _context.Clasificacionsuplidores.FindAsync(id);
+            _context.Clasificacionsuplidores.Remove(clasificacionsuplidores);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StatusExists(int id)
+        private bool ClasificacionsuplidoresExists(int id)
         {
-            return _context.Status.Any(e => e.statusID == id);
+            return _context.Clasificacionsuplidores.Any(e => e.ClasificacionsuplidoresID == id);
         }
     }
 }
