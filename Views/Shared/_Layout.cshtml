@@ -7,42 +7,43 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body >
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-secondary border-bottom box-shadow mb-3">
 
-
+            
             <div class="container">
 
-                <div class="dropdown">
-                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown ">
+                    <button type="button"  class="btn btn-info btn-lg  btn-block  dropdown-toggle "   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Mantenimiento
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Pais" asp-action="Index">pais</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Provincias" asp-action="Index">Provincias</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Municipios" asp-action="Index">Municipios</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Sectors" asp-action="Index">Sectores</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Articulos" asp-action="Index">Articulos</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Empleadoes" asp-action="Index">Empleados</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Marcas" asp-action="Index">Marcas</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Empresas" asp-action="Index">Empresas</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Suplidores" asp-action="Index">Suplidores</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Monedas" asp-action="Index">Monedas</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Status" asp-action="Index">Status</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Tasadecambios" asp-action="Index">Tasa de cambios</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Tiposdocumentos" asp-action="Index">Tipos de Documentos</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Ubicacions" asp-action="Index">Ubicaciones</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Vendedores" asp-action="Index">Vendedores</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Unidaddemedidas" asp-action="Index">Unidad de medidas</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Formadepagoes" asp-action="Index">Forma de pagos</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Formadeenvios" asp-action="Index">Forma de envios</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Clasificacionsuplidores" asp-action="Index">Clasificacion de suplidores</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="ClasificacionArticulos" asp-action="Index">Clasificacion de Articulos</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Clasificacionclientes" asp-action="Index">Clasificacion de clientes</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Puestodetrabajoes" asp-action="Index">Puesto de Trabajos</a>
+                    <div class="dropdown-menu bg-dark " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Home" asp-action="Index">o Inicio</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Articulos" asp-action="Index">o Articulos</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Clientes" asp-action="Index">o Clientes</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Clasificacionsuplidores" asp-action="Index">o Clasificacion de suplidores</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="ClasificacionArticulos" asp-action="Index">o Clasificacion de Articulos</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Clasificacionclientes" asp-action="Index">o Clasificacion de clientes</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Empleadoes" asp-action="Index">o Empleados</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Empresas" asp-action="Index">o Empresas</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Formadepagoes" asp-action="Index">o Forma de pagos</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Formadeenvios" asp-action="Index">o Forma de envios</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Municipios" asp-action="Index">o Municipios</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Marcas" asp-action="Index">o Marcas</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Monedas" asp-action="Index">o Monedas</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Pais" asp-action="Index">o pais</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Provincias" asp-action="Index">o Provincias</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Sectors" asp-action="Index">o Sectores</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Puestodetrabajoes" asp-action="Index">o Puesto de Trabajos</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Suplidores" asp-action="Index">o Suplidores</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Status" asp-action="Index">o Status</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Tasadecambios" asp-action="Index">o Tasa de cambios</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Tiposdocumentos" asp-action="Index">o Tipos de Documentos</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Ubicacions" asp-action="Index">o Ubicaciones</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Unidaddemedidas" asp-action="Index">o Unidad de medidas</a>
+                        <a class="dropdown-item text-white" asp-area="" asp-controller="Vendedores" asp-action="Index">o Vendedores</a>
+
                     </div>
 
 
@@ -65,9 +66,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-white  bg-secondary">
         <div class="container">
-            &copy; 2020 - FAcT - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - ADmultisoftware 
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
